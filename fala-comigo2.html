@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fala comigo — portugais au quotidien</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F8FD; --surface:#FFFFFF; --ink:#13213F; --muted:#5B6785;
+  --cobalt:#1E4AA8; --cobalt-soft:#DCE5F8; --tram:#F2B705; --ok:#1F8A5B; --ko:#C23A2E;
+  --line:#D5DDEE;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1630; --surface:#17213F; --ink:#EEF2FC; --muted:#A3AECB;
+    --cobalt:#8FB0F5; --cobalt-soft:#23315A; --tram:#F5C63A; --ok:#4CC08A; --ko:#F07A6E; --line:#2C3A63;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1630; --surface:#17213F; --ink:#EEF2FC; --muted:#A3AECB;
+  --cobalt:#8FB0F5; --cobalt-soft:#23315A; --tram:#F5C63A; --ok:#4CC08A; --ko:#F07A6E; --line:#2C3A63;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--tram);outline-offset:2px}
+.wrap{max-width:520px;margin:0 auto;padding:16px 18px 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.brand{font-weight:800;font-size:1.35rem;letter-spacing:-.02em;background:none;border:0;padding:0}
+.stats{display:flex;gap:14px;font-size:.95rem;color:var(--muted)}
+.stats b{color:var(--ink)}
+.variant{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.variant button{border:0;background:none;padding:6px 12px;font-size:.9rem;font-weight:600;color:var(--muted)}
+.variant button[aria-pressed="true"]{background:var(--cobalt);color:var(--bg)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:4px 0 22px;width:100%;
+  background:none;border:0;padding:0;text-align:center}
+.week .day{display:flex;flex-direction:column;align-items:center;gap:5px}
+.week svg{width:100%;height:auto;display:block;border-radius:6px}
+.week .t-bg{fill:var(--surface);stroke:var(--line);stroke-width:2}
+.week .t-mo{fill:none;stroke:var(--line);stroke-width:3}
+.week .t-dot{fill:var(--line)}
+.week .on .t-bg{fill:var(--cobalt);stroke:var(--cobalt)}
+.week .on .t-mo{stroke:var(--bg)}
+.week .on .t-dot{fill:var(--bg)}
+.week .goal .t-bg{stroke:var(--tram);stroke-width:6}
+.week .goal .t-dot{fill:var(--tram)}
+.week .future svg{opacity:.45}
+.week .future .t-bg{stroke-dasharray:6 5}
+.week .lbl{font-size:.78rem;color:var(--muted);font-weight:600;text-transform:capitalize}
+.week .is-today .lbl{color:var(--ink);font-weight:800}
+.week .is-today .lbl::after{content:"";display:block;width:14px;height:3px;border-radius:2px;background:var(--tram);margin:2px auto 0}
+h1{font-size:2rem;line-height:1.1;letter-spacing:-.03em;margin:0 0 6px;font-weight:800}
+.lead{color:var(--muted);margin:0 0 22px}
+.modes{display:grid;gap:12px}
+.mode{display:flex;align-items:center;gap:14px;text-align:left;background:var(--surface);
+  border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.mode:hover{border-color:var(--cobalt)}
+.mode .ic{flex:none;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+  background:var(--cobalt-soft);font-size:1.5rem}
+.mode strong{display:block;font-size:1.1rem}
+.mode small{color:var(--muted);font-size:.9rem}
+.due{margin-left:auto;background:var(--tram);color:#13213F;font-weight:800;border-radius:999px;padding:2px 10px;font-size:.85rem}
+.tip{margin-top:22px;font-size:.9rem;color:var(--muted);border-left:3px solid var(--tram);padding-left:12px}
+/* exercise */
+.top{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.back{border:0;background:none;font-size:1.4rem;padding:4px 8px}
+.bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--tram);width:0;transition:width .3s}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:26px 20px;min-height:220px;
+  display:flex;flex-direction:column;justify-content:center;gap:12px}
+.prompt{color:var(--muted);font-size:.95rem;margin:0}
+.big{font-size:1.75rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:0}
+.pt{color:var(--cobalt)}
+.note{font-size:.92rem;color:var(--muted);background:var(--cobalt-soft);border-radius:10px;padding:10px 12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{flex:1;min-width:100px;border:0;border-radius:14px;padding:14px 12px;font-weight:700;background:var(--cobalt);color:var(--bg)}
+.btn.alt{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.btn.ko{background:var(--ko)} .btn.ok{background:var(--ok)}
+.audio{display:flex;gap:8px}
+.audio button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:600}
+.choices{display:grid;gap:10px;margin-top:16px}
+.choice{text-align:left;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:14px 16px;font-weight:600}
+.choice.good{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--surface))}
+.choice.bad{border-color:var(--ko);background:color-mix(in srgb,var(--ko) 14%,var(--surface))}
+.slot{min-height:58px;border-bottom:2px dashed var(--line);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tile{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;font-weight:600}
+.slot .tile{background:var(--cobalt-soft);border-color:transparent}
+.feedback{font-weight:700;margin:0}
+.feedback.ok{color:var(--ok)} .feedback.ko{color:var(--ko)}
+.end{text-align:center}
+.end .big{font-size:2.4rem}
+.hidden{display:none!important}
+.warn{font-size:.88rem;color:var(--ko);margin-top:10px}
+.hdr-right{display:flex;align-items:center;gap:8px}
+.icon-btn{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;width:38px;height:34px;font-size:1rem}
+.today{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:14px;text-align:left;width:100%;display:block}
+.today .lbl{display:flex;justify-content:space-between;font-size:.92rem;color:var(--muted);margin-bottom:8px}
+.today .lbl b{color:var(--ink)}
+.pbar{height:12px;background:var(--line);border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--tram);border-radius:99px}
+.pbar.done i{background:var(--ok)}
+h2{font-size:1.15rem;margin:26px 0 10px;letter-spacing:-.01em}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px}
+.kpi b{display:block;font-size:1.5rem;letter-spacing:-.02em}
+.kpi small{color:var(--muted);font-size:.82rem}
+.goal{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.92rem;color:var(--muted);margin-top:12px}
+.goal button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-weight:600}
+.goal button[aria-pressed="true"]{background:var(--cobalt);color:var(--bg);border-color:var(--cobalt)}
+.heat-wrap{overflow-x:auto}
+.heat{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:minmax(18px,1fr);gap:4px;min-width:300px}
+.heat span{aspect-ratio:1;border-radius:4px;background:var(--line)}
+.heat span.l1{background:color-mix(in srgb,var(--cobalt) 35%,var(--line))}
+.heat span.l2{background:color-mix(in srgb,var(--cobalt) 70%,var(--line))}
+.heat span.l3{background:var(--cobalt);box-shadow:inset 0 0 0 2px var(--tram)}
+.heat span.fut{background:transparent}
+.heat span.now{outline:2px solid var(--ink);outline-offset:1px}
+.legend{display:flex;gap:6px;align-items:center;font-size:.8rem;color:var(--muted);margin-top:8px}
+.legend span{width:12px;height:12px;border-radius:3px;display:inline-block}
+.chart{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 8px 6px}
+.chart svg{display:block;width:100%;height:auto}
+.days{display:grid;gap:8px}
+.dayrow{display:grid;grid-template-columns:1fr auto;gap:2px 12px;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 14px}
+.dayrow .d{font-weight:700;text-transform:capitalize}
+.dayrow .n{font-weight:700;text-align:right}
+.dayrow small{grid-column:1/-1;color:var(--muted);font-size:.85rem}
+.dayrow.empty{opacity:.55}
+.path{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:14px}
+.path h3{margin:0 0 10px;font-size:1rem;display:flex;justify-content:space-between;align-items:baseline}
+.path h3 small{color:var(--muted);font-weight:600;font-size:.85rem}
+.lvl{display:grid;grid-template-columns:28px 1fr auto;gap:2px 10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.lvl:first-of-type{border-top:0}
+.lvl .num{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:.9rem;background:var(--line);color:var(--muted)}
+.lvl.open .num{background:var(--cobalt);color:var(--bg)}
+.lvl.cur .num{box-shadow:0 0 0 3px var(--tram)}
+.lvl .nm{font-weight:700}
+.lvl .ds{grid-column:2/-1;color:var(--muted);font-size:.85rem}
+.lvl .pc{font-size:.85rem;color:var(--muted);font-weight:600}
+.lvl.locked{opacity:.6}
+.lvl .mini{grid-column:2/-1;height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:4px}
+.lvl .mini{position:relative}
+.lvl .mini i{position:absolute;left:0;top:0;height:100%;border-radius:99px}
+.lvl .mini i.seen{background:color-mix(in srgb,var(--cobalt) 35%,var(--line))}
+.lvl .mini i.acq{background:var(--tram)}
+button.lvl{width:100%;background:none;border-left:0;border-right:0;border-bottom:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+button.lvl:hover .nm{color:var(--cobalt)}
+.path .help{font-size:.82rem;color:var(--muted);margin:10px 0 0}
+.levelup{background:var(--tram);color:#13213F;border-radius:14px;padding:12px 14px;font-weight:700;margin-bottom:14px}
+.sync{font-size:.88rem;color:var(--muted);margin:0 0 14px}
+.backup{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px}
+.backup p{margin:0 0 10px;font-size:.9rem;color:var(--muted)}
+.backup textarea{width:100%;min-height:70px;font:13px/1.3 ui-monospace,monospace;border:1.5px solid var(--line);border-radius:10px;padding:8px;background:var(--bg);color:var(--ink);resize:vertical}
+.backup .msg{font-weight:700;font-size:.9rem;margin-top:8px}
+.story-item{display:flex;align-items:center;gap:14px;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;width:100%}
+.story-item:hover:not(:disabled){border-color:var(--cobalt)}
+.story-item .ic{flex:none;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:var(--cobalt-soft);font-size:1.5rem}
+.story-item .st-txt{flex:1}
+.story-item strong{display:block;font-size:1.05rem}
+.story-item small{color:var(--muted);font-size:.88rem}
+.story-item .st-right{font-size:.85rem;font-weight:700;color:var(--muted);white-space:nowrap}
+.story-item .st-right .due{margin:0}
+.story-item.locked{opacity:.55;cursor:default}
+.st-title{margin:0 0 16px}
+.chat{display:flex;flex-direction:column;gap:10px;padding-bottom:8px}
+.bub-row{display:flex;align-items:flex-end;gap:8px;max-width:88%}
+.bub-row.me{align-self:flex-end;flex-direction:row-reverse}
+.av{font-size:1.6rem;line-height:1;flex:none}
+.bub{text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:18px 18px 18px 6px;padding:10px 14px;display:flex;flex-direction:column;gap:2px;font-weight:600}
+.bub.me{background:var(--cobalt);color:var(--bg);border-color:var(--cobalt);border-radius:18px 18px 6px 18px}
+.bub .who{font-size:.78rem;color:var(--muted);font-weight:700}
+.bub .bpt{font-size:1.05rem}
+.bub .tr{font-size:.88rem;font-weight:400;color:var(--muted);margin-top:4px}
+.bub.me .tr{color:color-mix(in srgb,var(--bg) 80%,var(--cobalt))}
+.chat .note{margin:0 0 4px 38px}
+.st-act{margin-top:14px;padding-bottom:20px}
+.st-q{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:16px}
+.st-q .choices{margin-top:12px}
+.st-q .feedback{margin-top:12px}
+.fill-line{font-size:1.15rem;font-weight:700;margin:10px 0 0}
+.fill-line .who{display:block;font-size:.78rem;color:var(--muted)}
+.gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--tram);color:transparent}
+.hud{display:flex;gap:10px;align-items:stretch;margin-bottom:16px}
+.hud-streak{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:8px 14px;font-size:1.2rem}
+.hud-streak b{font-size:1.3rem;line-height:1}
+.hud-streak small{font-size:.75rem;color:var(--muted)}
+.hud-rank{flex:1;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.hud-rank .rk-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.hud-rank .rk-xp{font-weight:800;color:var(--cobalt)}
+.hud-rank small{color:var(--muted);font-size:.8rem}
+.review-cta{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--tram);color:#13213F;border:0;border-radius:16px;padding:14px 16px;margin-bottom:18px}
+.review-cta .ic{font-size:1.5rem}
+.review-cta .rv-txt{flex:1}
+.review-cta strong{display:block;font-size:1.05rem}
+.review-cta small{font-size:.86rem;opacity:.85}
+.review-cta .due{background:#13213F;color:var(--tram)}
+.review-ok{font-size:.9rem;color:var(--ok);font-weight:700;margin:0 0 18px}
+.saga{display:flex;flex-direction:column;gap:14px;margin-bottom:8px}
+.ch-head{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--cobalt);color:var(--bg);border:0;border-radius:18px;padding:14px 16px}
+.ch-head .ch-em{font-size:1.8rem;flex:none}
+.ch-head .ch-txt{flex:1;display:flex;flex-direction:column}
+.ch-head small{font-size:.8rem;opacity:.8}
+.ch-head strong{font-size:1.2rem;letter-spacing:-.01em}
+.ch-head .ch-txt span{font-size:.86rem;opacity:.85}
+.ch-head .ch-count{font-weight:800;font-size:.95rem;background:color-mix(in srgb,var(--bg) 20%,transparent);border-radius:999px;padding:3px 10px}
+.ch-head.complete{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.ch-head.complete .ch-count{background:var(--ok);color:#fff}
+.ch-head.locked{background:var(--surface);color:var(--muted);border:1.5px dashed var(--line);cursor:default}
+.nodes{display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px 0 6px}
+.node-row{display:flex;flex-direction:column;align-items:center;width:100%}
+.node{position:relative;width:72px;height:72px;padding:0;border:0;background:none;transform:translateX(var(--x));transition:transform .15s}
+.node svg{width:100%;height:100%;display:block}
+.node .t-bg{fill:var(--line);stroke:none}
+.node .t-mo{fill:none;stroke:color-mix(in srgb,var(--muted) 35%,transparent);stroke-width:3}
+.node .n-ic{position:absolute;inset:0;display:grid;place-items:center;font-size:1.55rem;font-weight:800;color:var(--muted)}
+.node.done .t-bg{fill:var(--cobalt)}
+.node.done .t-mo{stroke:color-mix(in srgb,var(--bg) 35%,transparent)}
+.node.done .n-ic{color:var(--bg)}
+.node .n-ok{position:absolute;right:-6px;bottom:-6px;width:24px;height:24px;border-radius:50%;background:var(--ok);color:#fff;font-size:.8rem;font-weight:800;display:grid;place-items:center;border:2px solid var(--bg)}
+.node.current .t-bg{fill:var(--tram)}
+.node.current .t-mo{stroke:color-mix(in srgb,#13213F 30%,transparent)}
+.node.current .n-ic{color:#13213F}
+.node.current::before{content:"";position:absolute;inset:-8px;border-radius:18px;border:3px solid var(--tram);opacity:.55;animation:ring 1.6s ease-out infinite}
+@keyframes ring{0%{transform:scale(.92);opacity:.7}100%{transform:scale(1.12);opacity:0}}
+.node.story .n-ic,.node.chest .n-ic{font-size:1.7rem}
+.node.locked{cursor:default}
+.node.locked .n-ic{font-size:1.1rem;opacity:.7}
+.pop{position:relative;margin-top:14px;width:min(100%,340px);background:var(--surface);border:1.5px solid var(--tram);border-radius:16px;padding:14px 16px;text-align:left}
+.pop::before{content:"";position:absolute;top:-9px;left:50%;width:16px;height:16px;background:var(--surface);border-left:1.5px solid var(--tram);border-top:1.5px solid var(--tram);transform:translateX(-50%) rotate(45deg)}
+.pop strong{display:block;font-size:1.05rem}
+.pop p{margin:4px 0 12px;color:var(--muted);font-size:.9rem}
+.pop .btn{width:100%}
+.sess-xp{font-weight:800;color:var(--cobalt);font-size:.95rem;white-space:nowrap}
+.xp-big{font-size:2rem;font-weight:800;color:var(--tram);margin:0;letter-spacing:-.02em}
+.fin-rank{display:flex;flex-direction:column;gap:6px;margin-top:10px;text-align:left}
+.fin-rank span:first-child{font-weight:700}
+.fin-rank small{color:var(--muted);font-size:.85rem}
+.chest-stage{display:flex;flex-direction:column;align-items:center;gap:8px;padding:30px 0 10px}
+.chest-btn{font-size:5.5rem;line-height:1;border:0;background:none;padding:10px;transition:transform .2s}
+.chest-btn.opening{animation:shake .6s ease-in-out}
+@keyframes shake{0%,100%{transform:rotate(0) scale(1)}20%{transform:rotate(-12deg) scale(1.05)}40%{transform:rotate(12deg) scale(1.1)}60%{transform:rotate(-8deg) scale(1.15)}80%{transform:rotate(6deg) scale(1.2)}}
+.cad-card{background:var(--surface);border:1.5px solid var(--line);border-left:5px solid var(--cobalt);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.cad-card small{color:var(--muted);font-size:.8rem;font-weight:700}
+.cad-card .big{font-size:1.4rem}
+.cad-card.locked{border-left-color:var(--line);opacity:.65}
+.cad-pt{font-size:1.15rem;font-weight:800;color:var(--cobalt);margin:0;display:flex;gap:8px;align-items:center}
+.cad-fr{margin:0;font-weight:600}
+.cad-note{margin:0;color:var(--muted);font-size:.9rem}
+.cad-list{display:grid;gap:12px}
+.say{border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:2px 8px;font-size:.9rem}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);font-weight:700;padding:10px 16px;border-radius:999px;transition:opacity .2s,transform .2s;z-index:10;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.next-card{background:var(--surface);border:2px solid var(--cobalt);border-radius:20px;padding:16px;margin-bottom:18px;display:flex;flex-direction:column;gap:10px}
+.next-card .nc-top{display:flex;gap:12px;align-items:flex-start}
+.next-card .nc-em{font-size:2rem;line-height:1;flex:none;width:52px;height:52px;border-radius:14px;background:var(--cobalt-soft);display:grid;place-items:center}
+.next-card .nc-txt{display:flex;flex-direction:column;gap:2px}
+.next-card small{color:var(--muted);font-size:.82rem;font-weight:700}
+.next-card strong{font-size:1.2rem;letter-spacing:-.01em}
+.next-card .nc-txt span{color:var(--muted);font-size:.9rem}
+.next-card .nc-pc{font-weight:600}
+.next-card .btn{width:100%;font-size:1.05rem}
+.next-card.done{border-color:var(--ok);text-align:center}
+.hub{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.hub-tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px}
+.hub-tile:hover{border-color:var(--cobalt)}
+.hub-tile .ic{font-size:1.5rem;width:44px;height:44px;border-radius:12px;background:var(--cobalt-soft);display:grid;place-items:center;margin-bottom:4px}
+.hub-tile strong{font-size:1rem}
+.hub-tile small{color:var(--muted);font-size:.82rem;line-height:1.3}
+.node.bonus{width:60px;height:60px;margin-bottom:12px}
+.node.bonus .t-bg{stroke:var(--cobalt);stroke-width:2.5;stroke-dasharray:5 4}
+.node.bonus.open .t-bg{fill:var(--cobalt-soft)}
+.node.bonus.open .n-ic{color:var(--cobalt)}
+.node.bonus.open::after{content:"bonus";position:absolute;left:50%;bottom:-16px;transform:translateX(-50%);font-size:.7rem;font-weight:800;color:var(--cobalt)}
+.node.bonus.done .t-bg{stroke:none}
+.node.bonus .n-ic{font-size:1.35rem}
+.ch-head .ch-count{display:flex;flex-direction:column;align-items:center;gap:2px}
+.ch-bonus{font-size:.72rem;font-weight:700;opacity:.85}
+.st-group{display:flex;justify-content:space-between;align-items:baseline;font-size:1.05rem;margin:22px 0 10px}
+.st-group small{color:var(--muted);font-weight:600;font-size:.85rem}
+.tag{display:inline-block;font-size:.68rem;font-weight:800;background:var(--cobalt-soft);color:var(--cobalt);border-radius:6px;padding:1px 6px;vertical-align:middle;margin-left:4px}
+@media (prefers-reduced-motion: reduce){.node.current::before,.chest-btn.opening{animation:none}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <button class="brand" id="home-btn" aria-label="Accueil">Fala comigo</button>
+    <div class="hdr-right">
+    <button class="icon-btn" id="stats-btn" aria-label="Suivi par jour">📅</button>
+    </div>
+  </header>
+
+  <main id="app"></main>
+</div>
+
+<script>
+/* ---------- Contenu : phrases utiles (fr, pt-PT, pt-BR si différent, note) ---------- */
+const RAW = [
+ ["Bonjour (le matin)","Bom dia"],
+ ["Bon après-midi","Boa tarde"],
+ ["Bonsoir / bonne nuit","Boa noite"],
+ ["Salut !","Olá!","Oi!"],
+ ["Comment ça va ?","Como estás?","Tudo bem?","Au Brésil, « Tudo bem? » sert à la fois de question et de réponse : « Tudo bem! »"],
+ ["Ça va bien, merci","Estou bem, obrigado"],
+ ["Merci","Obrigado","Obrigado","Un homme dit « obrigado », une femme dit « obrigada »."],
+ ["De rien","De nada"],
+ ["S'il te plaît","Por favor"],
+ ["Pardon, désolé","Desculpa"],
+ ["Pardon (pour passer)","Com licença"],
+ ["Enchanté","Muito prazer"],
+ ["À tout à l'heure","Até logo"],
+ ["À demain","Até amanhã"],
+ ["Bon week-end !","Bom fim de semana!"],
+ ["Je m'appelle Paulo","Chamo-me Paulo","Meu nome é Paulo"],
+ ["Je suis français","Sou francês","Sou francês","Au féminin : « Sou francesa »."],
+ ["J'habite en France","Vivo em França","Moro na França","Au Portugal on dit « em França », sans article ; au Brésil « na França »."],
+ ["Où est-ce que tu habites ?","Onde vives?","Onde você mora?"],
+ ["Quel âge as-tu ?","Quantos anos tens?","Quantos anos você tem?"],
+ ["J'ai trente ans","Tenho trinta anos"],
+ ["Je suis ici en vacances","Estou aqui de férias"],
+ ["J'apprends le portugais","Estou a aprender português","Estou aprendendo português","Réflexe clé : le Portugal dit « estar a + infinitif », le Brésil utilise le gérondif en -ndo."],
+ ["Je parle un peu portugais","Falo um pouco de português"],
+ ["Je ne comprends pas","Não percebo","Não entendo"],
+ ["Tu peux répéter, s'il te plaît ?","Podes repetir, por favor?","Pode repetir, por favor?"],
+ ["Plus lentement, s'il te plaît","Mais devagar, por favor"],
+ ["Comment on dit … en portugais ?","Como se diz … em português?"],
+ ["Qu'est-ce que ça veut dire ?","O que quer dizer isto?","O que isso quer dizer?"],
+ ["Je ne sais pas","Não sei"],
+ ["Je voudrais un café, s'il vous plaît","Queria um café, por favor","Queria um café, por favor","Au Portugal, « um café » est un expresso."],
+ ["Une table pour deux, s'il vous plaît","Uma mesa para dois, por favor"],
+ ["L'addition, s'il vous plaît","A conta, por favor"],
+ ["C'est combien ?","Quanto custa?"],
+ ["C'est délicieux !","Está delicioso!"],
+ ["Je suis végétarien","Sou vegetariano"],
+ ["Le jus d'orange","O sumo de laranja","O suco de laranja"],
+ ["Le petit-déjeuner","O pequeno-almoço","O café da manhã"],
+ ["Où sont les toilettes ?","Onde é a casa de banho?","Onde fica o banheiro?"],
+ ["Où est la gare ?","Onde fica a estação?"],
+ ["Le bus","O autocarro","O ônibus"],
+ ["Le train","O comboio","O trem"],
+ ["Un billet pour Lisbonne, s'il vous plaît","Um bilhete para Lisboa, por favor","Uma passagem para Lisboa, por favor"],
+ ["À droite","À direita"],
+ ["À gauche","À esquerda"],
+ ["Tout droit","Sempre em frente"],
+ ["C'est loin ?","É longe?"],
+ ["C'est près d'ici ?","É perto daqui?"],
+ ["Je suis perdu","Estou perdido"],
+ ["J'ai faim","Tenho fome"],
+ ["J'ai soif","Tenho sede"],
+ ["Je suis fatigué","Estou cansado"],
+ ["D'accord","Está bem","Tá bom"],
+ ["Pas de problème","Não há problema","Sem problema"],
+ ["Ce n'est pas grave","Não faz mal"],
+ ["Bien sûr !","Claro!"],
+ ["On y va !","Vamos!"],
+ ["J'aime beaucoup","Gosto muito"],
+ ["Tu aimes ?","Gostas?","Você gosta?"],
+ ["Quelle heure est-il ?","Que horas são?"],
+ ["Il pleut","Está a chover","Está chovendo"],
+ ["Le téléphone portable","O telemóvel","O celular"],
+ ["Génial ! / Cool !","Fixe!","Legal!"],
+ ["Tu me manques","Tenho saudades tuas","Estou com saudade de você","« Saudade » : ce manque doux-amer, mot emblématique de la langue."]
+];
+const L2 = [
+ ["Comment va la famille ?","Como está a família?"],
+ ["Ça fait longtemps !","Há quanto tempo!"],
+ ["Ça fait plaisir de te voir !","Que bom ver-te!"],
+ ["Tu as bonne mine","Estás com bom aspeto"],
+ ["Voici ma mère","Esta é a minha mãe","Pour présenter quelqu'un : « este » au masculin, « esta » au féminin."],
+ ["Voici mon père","Este é o meu pai"],
+ ["Tu as des frères et sœurs ?","Tens irmãos?","« Irmãos » désigne les frères et sœurs ensemble."],
+ ["J'ai un frère et une sœur","Tenho um irmão e uma irmã"],
+ ["Mes grands-parents vivent au Portugal","Os meus avós vivem em Portugal","Au Portugal on met l'article devant le possessif : « o meu », « a minha »."],
+ ["Ma grand-mère cuisine très bien","A minha avó cozinha muito bem"],
+ ["Comment s'appelle ton cousin ?","Como se chama o teu primo?"],
+ ["Tu es marié ?","És casado?"],
+ ["J'ai deux enfants","Tenho dois filhos"],
+ ["Qu'est-ce que tu fais dans la vie ?","O que fazes na vida?"],
+ ["Je travaille dans l'informatique","Trabalho em informática"],
+ ["Qu'est-ce que tu aimes faire ?","O que gostas de fazer?","« Gostar » se construit avec « de » : gosto de futebol, gosto de ler."],
+ ["J'aime beaucoup le football","Gosto muito de futebol"],
+ ["Je n'aime pas trop le poisson","Não gosto muito de peixe"],
+ ["Quel est ton plat préféré ?","Qual é a tua comida preferida?"],
+ ["J'adore la morue","Adoro bacalhau"],
+ ["Le week-end, je me repose","Ao fim de semana, descanso"],
+ ["D'habitude, je me réveille à sept heures","Normalmente acordo às sete"],
+ ["À quelle heure est le dîner ?","A que horas é o jantar?"],
+ ["Le déjeuner est prêt !","O almoço está pronto!"],
+ ["À table !","Vamos para a mesa!"],
+ ["Bon appétit !","Bom apetite!"],
+ ["Santé !","Saúde!"],
+ ["Tu en veux encore ?","Queres mais?"],
+ ["Oui, juste un petit peu","Sim, só um bocadinho"],
+ ["Non merci, ça suffit","Não, obrigado, já chega"],
+ ["Je n'en peux plus (j'ai trop mangé)","Estou cheio","Au féminin : « Estou cheia »."],
+ ["C'est excellent !","Está ótimo!"],
+ ["Je peux aider ?","Posso ajudar?"],
+ ["Joyeux anniversaire ! / Félicitations !","Parabéns!"],
+ ["Joyeux Noël !","Feliz Natal!"],
+ ["Vous me manquez","Tenho saudades vossas"],
+ ["Je t'aime beaucoup (affection)","Gosto muito de ti","Pour la famille et les amis. « Amo-te » est réservé au couple."],
+ ["Bisous","Um beijinho"],
+ ["Je t'embrasse (fin de message)","Um abraço"],
+ ["Passe le bonjour à ta mère","Dá cumprimentos à tua mãe"],
+ ["Je t'entends mal (au téléphone)","Não te ouço bem"],
+ ["Je suis encore en train d'apprendre","Ainda estou a aprender"],
+ ["Tu peux me corriger ?","Podes corrigir-me?","Au Portugal, le pronom se place souvent après le verbe, avec un tiret : corrigir-me, chamo-me."]
+];
+const L3 = [
+ ["Hier, je suis allé au marché","Ontem fui ao mercado","« Fui » sert à la fois pour « je suis allé » (ir) et « j'ai été » (ser)."],
+ ["Hier, j'ai dîné avec mes parents","Ontem jantei com os meus pais"],
+ ["J'ai trop mangé","Comi demasiado"],
+ ["J'ai très bien dormi","Dormi muito bem"],
+ ["Je n'ai pas du tout dormi","Não dormi nada"],
+ ["Comment s'est passé le voyage ?","Como foi a viagem?"],
+ ["Le voyage s'est bien passé","A viagem correu bem"],
+ ["Je suis arrivé hier soir","Cheguei ontem à noite"],
+ ["Qu'est-ce que tu as fait hier ?","O que fizeste ontem?"],
+ ["Je suis resté à la maison","Fiquei em casa"],
+ ["J'ai appelé ma tante","Liguei à minha tia"],
+ ["Tu m'as beaucoup manqué","Tive muitas saudades tuas"],
+ ["Quand j'étais petit, j'allais à la plage avec mon grand-père","Quando eu era pequeno, ia à praia com o meu avô","L'imparfait (era, ia) pour les habitudes du passé, comme en français."],
+ ["Ma grand-mère racontait des histoires","A minha avó contava histórias"],
+ ["Tu es déjà allé à Porto ?","Já estiveste no Porto?"],
+ ["Je ne suis jamais allé aux Açores","Nunca estive nos Açores"],
+ ["J'ai oublié son nom","Esqueci-me do nome dele"],
+ ["J'ai raté le train","Perdi o comboio"],
+ ["Je dormais quand tu as appelé","Estava a dormir quando ligaste"],
+ ["Il a plu toute la journée","Choveu o dia todo"],
+ ["C'était très amusant !","Foi muito divertido!"],
+ ["J'ai été très content de te voir","Gostei muito de te ver"],
+ ["Je l'ai rencontré au mariage","Conheci-o no casamento"],
+ ["J'ai déjà fini","Já acabei"],
+ ["Pas encore","Ainda não"],
+ ["J'apprends le portugais depuis deux mois","Estudo português há dois meses","« Há » + durée = « depuis » (ou « il y a » selon le temps du verbe)."],
+ ["Demain, je vais rendre visite à mes grands-parents","Amanhã vou visitar os meus avós","Futur proche : « ir » + infinitif, comme en français."],
+ ["Je vais t'appeler ce soir","Vou ligar-te logo à noite"],
+ ["Cet été, je vais au Portugal","Este verão vou a Portugal"],
+ ["On déjeune ensemble dimanche ?","Vamos almoçar juntos no domingo?"],
+ ["Qu'est-ce que tu vas faire ce week-end ?","O que vais fazer no fim de semana?"],
+ ["Je vais rester une semaine","Vou ficar uma semana"],
+ ["Quand est-ce que tu viens en France ?","Quando é que vens a França?"],
+ ["Je reviens l'année prochaine","Venho outra vez para o ano"],
+ ["J'allais dire la même chose","Ia dizer o mesmo"],
+ ["Ça va me manquer","Vou ter saudades"]
+];
+const L4 = [
+ ["Je pense que tu as raison","Acho que tens razão"],
+ ["Je ne suis pas d'accord","Não concordo"],
+ ["Ça dépend","Depende"],
+ ["Qu'est-ce que tu en penses ?","O que é que achas?"],
+ ["Pour moi, c'est la meilleure plage","Para mim, é a melhor praia"],
+ ["Je vais y réfléchir","Vou pensar nisso"],
+ ["Peu importe","Tanto faz"],
+ ["Aucune idée","Não faço ideia"],
+ ["Je ne me sens pas bien","Não me sinto bem"],
+ ["J'ai mal à la tête","Dói-me a cabeça","Littéralement « la tête me fait mal »."],
+ ["Je dois aller à la pharmacie","Preciso de ir à farmácia"],
+ ["Je m'inquiète pour toi","Estou preocupado contigo"],
+ ["Ne t'inquiète pas","Não te preocupes"],
+ ["Je suis très content pour toi","Fico muito contente por ti"],
+ ["Je suis fier de toi","Estou orgulhoso de ti"],
+ ["Quel dommage !","Que pena!"],
+ ["Quelle chance !","Que sorte!"],
+ ["Si seulement !","Quem me dera!"],
+ ["Courage !","Força!"],
+ ["Merci pour tout","Obrigado por tudo"],
+ ["Tu me manques (autre façon de le dire)","Fazes-me falta"],
+ ["Je suis pressé","Estou com pressa"],
+ ["Désolé pour le retard","Desculpa o atraso"],
+ ["Attends un petit peu","Espera um bocadinho"],
+ ["Je reviens tout de suite","Já volto"],
+ ["Laisse, ce n'est rien","Deixa estar"],
+ ["Préviens-moi quand tu arrives","Avisa-me quando chegares","« Chegares » est un futur du subjonctif, très courant au Portugal après « quando » et « se »."],
+ ["Appelle-moi quand tu peux","Liga-me quando puderes"],
+ ["Si tu as le temps, passe à la maison","Se tiveres tempo, passa cá em casa"],
+ ["Si je pouvais, je resterais plus longtemps","Se eu pudesse, ficava mais tempo","À l'oral, l'imparfait (ficava) remplace souvent le conditionnel (ficaria)."],
+ ["J'espère que tout se passera bien","Espero que corra tudo bem"],
+ ["Tu peux réexpliquer ?","Podes explicar outra vez?"],
+ ["Tu as raison, j'ai complètement oublié","Tens razão, esqueci-me completamente"],
+ ["Je ne comprends pas encore tout, mais je progresse","Ainda não percebo tudo, mas estou a melhorar"],
+ ["Je suis tellement fatigué que je n'arrive même pas à réfléchir","Estou tão cansado que nem consigo pensar"]
+];
+const LEVELS = [
+ {n:1,name:"Survie",desc:"Saluer, se présenter, se débrouiller"},
+ {n:2,name:"En famille",desc:"Parler de soi, des proches, des repas"},
+ {n:3,name:"Raconter",desc:"Le passé et les projets"},
+ {n:4,name:"Vraies conversations",desc:"Donner son avis, ses émotions, rassurer"}
+];
+const UNLOCK = 0.6; // part du niveau précédent à ancrer pour débloquer le suivant
+const ITEMS = [
+ ...RAW.map(([fr,pt,br,note],i)=>({id:"c"+i,lvl:1,fr,pt,br:br||pt,note:note||""})),
+ ...[L2,L3,L4].flatMap((arr,k)=>arr.map(([fr,pt,note],i)=>({id:"l"+(k+2)+"_"+i,lvl:k+2,fr,pt,br:pt,note:note||""})))
+];
+/* ---------- État & sauvegarde ---------- */
+const DAY = 86400000;
+const today = () => { const d=new Date(); d.setHours(0,0,0,0); return d.getTime(); };
+const INTERVALS = [0,1,3,7,16,35]; // jours, par boîte (répétition espacée)
+const NEW_PER_DAY = 8;
+let S = {variant:"pt",xp:0,streak:0,lastDay:0,cards:{},days:{},goalXp:100,path:{},stories:{}};
+const pad = n => String(n).padStart(2,"0");
+const dkey = (t=Date.now()) => { const d=new Date(t); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); };
+function dayRec(k=dkey()){
+  if(!S.days || Object.isFrozen(S.days)) S.days=Object.assign({},S.days||{});
+  const d=S.days[k];
+  if(d && !Object.isFrozen(d)) return d;
+  return (S.days[k]=Object.assign({n:0,good:0,xp:0,nw:0,sec:0},d||{}));
+}
+let remote = null, saveTimer = null;
+
+let SYNC = {local:false, cloud:"off", lastCloud:0}; // cloud: off | pending | ok | error
+function loadLocal(){
+  try{ localStorage.setItem("fala-test","1"); localStorage.removeItem("fala-test"); SYNC.local=true; }catch(e){ SYNC.local=false; }
+  try{ const r=localStorage.getItem("fala-comigo"); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){}
+}
+function save(){
+  S.updatedAt=Date.now();
+  try{ localStorage.setItem("fala-comigo",JSON.stringify(S)); }catch(e){}
+  pushRemote();
+}
+// Envoi immédiat et dans l'ordre : chaque réponse part tout de suite vers le compte,
+// pour ne rien perdre si l'app est fermée juste après.
+let pushChain=Promise.resolve(), pushWaiting=false;
+function pushRemote(){
+  if(!remote || pushWaiting) return;
+  pushWaiting=true;
+  pushChain=pushChain.then(()=>{
+    pushWaiting=false;
+    return remote.set(JSON.parse(JSON.stringify(S)))
+      .then(()=>{ SYNC.cloud="ok"; SYNC.lastCloud=Date.now(); refreshSyncBadge(); })
+      .catch(()=>{ SYNC.cloud="error"; refreshSyncBadge(); });
+  });
+}
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") pushRemote(); });
+window.addEventListener("pagehide",()=>pushRemote());
+// Fusionne deux progressions sans rien perdre (le meilleur des deux côtés)
+function mergeState(a,b){
+  if(!b) return a;
+  // Copie profonde : les données lues sur le compte sont en lecture seule (figées).
+  // Sans cette copie, les cartes venues du compte ne pouvaient plus être modifiées.
+  a=JSON.parse(JSON.stringify(a)); b=JSON.parse(JSON.stringify(b));
+  const out=Object.assign({},a);
+  out.xp=Math.max(a.xp||0,b.xp||0);
+  out.goal=(b.updatedAt||0)>(a.updatedAt||0)?(b.goal||a.goal):(a.goal||b.goal);
+  out.unlocked=Math.max(a.unlocked||1,b.unlocked||1);
+  out.seenLevel=Math.max(a.seenLevel||1,b.seenLevel||1);
+  out.cards=Object.assign({},a.cards||{});
+  for(const [k,c] of Object.entries(b.cards||{})){
+    const m=out.cards[k];
+    if(!m || (c.box||0)>(m.box||0) || ((c.box||0)===(m.box||0) && (c.due||0)>(m.due||0))) out.cards[k]=c;
+  }
+  out.days=Object.assign({},a.days||{});
+  for(const [k,d] of Object.entries(b.days||{})){
+    const m=out.days[k]; if(!m || (d.n||0)>(m.n||0)) out.days[k]=d;
+  }
+  if((b.newDay||0)>(a.newDay||0)){ out.newDay=b.newDay; out.newCount=b.newCount; out.extraNew=b.extraNew; }
+  else if(b.newDay===a.newDay){ out.newCount=Math.max(a.newCount||0,b.newCount||0); out.extraNew=Math.max(a.extraNew||0,b.extraNew||0); }
+  out.path=Object.assign({},a.path||{},b.path||{});
+  out.goalXp=(b.updatedAt||0)>(a.updatedAt||0)?(b.goalXp||a.goalXp):(a.goalXp||b.goalXp);
+  if(a.rankSeen!==undefined||b.rankSeen!==undefined) out.rankSeen=Math.max(a.rankSeen??-1,b.rankSeen??-1);
+  out.stories=Object.assign({},a.stories||{});
+  for(const [k,v] of Object.entries(b.stories||{})){ const m=out.stories[k]; if(!m||(v.best||0)>(m.best||0)) out.stories[k]=v; }
+  out.updatedAt=Math.max(a.updatedAt||0,b.updatedAt||0);
+  return out;
+}
+function syncText(){
+  if(SYNC.cloud==="ok") return {ic:"☁️",t:"Progression sauvegardée sur ton compte Claude"};
+  if(SYNC.cloud==="pending") return {ic:"⏳",t:"Connexion à ton compte…"};
+  if(SYNC.cloud==="error") return {ic:"⚠️",t:"La sauvegarde en ligne a échoué. Progression gardée sur cet appareil seulement"};
+  if(SYNC.local) return {ic:"📱",t:"Progression sauvegardée sur cet appareil uniquement"};
+  return {ic:"⚠️",t:"Aucune sauvegarde possible ici : utilise le code de sauvegarde ci-dessous"};
+}
+function refreshSyncBadge(){
+  const el=document.getElementById("sync-badge"); if(!el) return;
+  const x=syncText(); el.textContent=x.ic+" "+x.t;
+}
+async function initRemote(){
+  if(!(window.claude && window.claude.use)) return;
+  try{
+    const [db,user] = await Promise.all([window.claude.use("db"),window.claude.use("user")]);
+    if(!db||!user) return;
+    const uid = await user.id(); if(!uid) return;
+    SYNC.cloud="pending"; refreshSyncBadge();
+    const ref = db.doc("data/users/"+uid+"/progress");
+    const snap = await ref.get();
+    const r = snap.exists ? snap.data() : null;
+    remote = ref;
+    S = mergeState(S, r);
+    try{localStorage.setItem("fala-comigo",JSON.stringify(S));}catch(e){}
+    pushRemote();
+    if(!session) render();
+  }catch(e){ remote=null; SYNC.cloud="error"; refreshSyncBadge(); }
+}
+
+function touchStreak(){
+  const t=today();
+  if(S.lastDay===t) return;
+  S.streak = (S.lastDay===t-DAY) ? S.streak+1 : 1;
+  S.lastDay=t;
+}
+const txt = it => it.pt;
+
+/* ---------- Audio (synthèse vocale du navigateur) ---------- */
+let voices=[];
+function loadVoices(){ try{ voices=speechSynthesis.getVoices(); }catch(e){} }
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+function voiceFor(){
+  const tag = "pt-pt";
+  const norm = v => v.lang.toLowerCase().replace("_","-");
+  return voices.find(v=>norm(v)===tag) || voices.find(v=>norm(v).startsWith("pt"));
+}
+function hasVoice(){ return "speechSynthesis" in window && !!voiceFor(); }
+function speak(text,slow,pitch){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text.replace("…","quê"));
+  const v=voiceFor(); if(v) u.voice=v;
+  u.lang = "pt-PT";
+  u.rate = slow ? .65 : .95;
+  if(pitch) u.pitch = pitch;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- Outils ---------- */
+const $app = document.getElementById("app");
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const esc = s => s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const clean = s => s.toLowerCase().replace(/[!?.,¿¡]/g,"").replace(/\s+/g," ").trim();
+
+function dueCards(){
+  const t=today();
+  return ITEMS.filter(it=>S.cards[it.id] && S.cards[it.id].due<=t);
+}
+function learnedPool(){ const l=ITEMS.filter(it=>S.cards[it.id]); return l.length>=6 ? l : openItems().slice(0,Math.max(12,l.length)); }
+
+/* ---------- Chemin : la saga « Um verão em Portugal » ---------- */
+const SAGA = [
+ {n:1,emoji:"✈️",title:"Chegada",fr:"Arriver, saluer, se présenter",src:["c",0,40],story:"s1"},
+ {n:2,emoji:"📞",title:"Ligar à avó",fr:"Se débrouiller et garder le contact",src:["c",40,64],story:"s2"},
+ {n:3,emoji:"👨‍👩‍👧",title:"A família",fr:"Parler de soi et de ses proches",src:["l2",0,21],story:"s4"},
+ {n:4,emoji:"🍲",title:"À mesa",fr:"Les repas et les mots doux",src:["l2",21,43],story:"s3"},
+ {n:5,emoji:"🚆",title:"Contar",fr:"Raconter le passé et les projets",src:["l3",0,36],story:"s5"},
+ {n:6,emoji:"🤍",title:"Conversas",fr:"Donner son avis, rassurer",src:["l4",0,35],story:"s6"}
+];
+const CADERNO = [
+ {pt:"Devagar se vai ao longe.",fr:"Lentement, on va loin.",note:"L'équivalent de « Qui va piano va sano ». Parfait pour quelqu'un qui apprend une langue."},
+ {pt:"Mais vale tarde do que nunca.",fr:"Mieux vaut tard que jamais.",note:"Presque mot pour mot comme en français."},
+ {pt:"Quem não arrisca não petisca.",fr:"Qui ne risque rien ne grignote rien.",note:"≈ « Qui ne risque rien n'a rien ». « Petiscar », c'est grignoter : les petiscos sont les tapas portugaises."},
+ {pt:"Estar com os azeites.",fr:"Littéralement « être avec les huiles ».",note:"Ça veut dire être de mauvaise humeur. « Hoje o João está com os azeites! »"},
+ {pt:"Água mole em pedra dura, tanto bate até que fura.",fr:"L'eau douce sur la pierre dure frappe tant qu'elle finit par la percer.",note:"La persévérance finit toujours par payer. Un peu comme ta série de jours."},
+ {pt:"Ir aos arames.",fr:"Littéralement « aller aux fils de fer ».",note:"Se mettre en colère, « péter un câble ». « A avó foi aos arames quando viu a cozinha! »"}
+];
+const RANKS = [
+ {xp:0,name:"Turista",em:"🧳"},{xp:1000,name:"Vizinho",em:"🏘️"},{xp:2500,name:"Amigo",em:"🤝"},
+ {xp:6000,name:"Primo",em:"🧑‍🤝‍🧑"},{xp:12000,name:"Da família",em:"🏠"},{xp:25000,name:"Alfacinha honorário",em:"🥬"}
+];
+const XP = {lesson:10, review:15, reviewMiss:5, practice:10, free:5, story:10, combo:5, nodeBonus:15, chest:30};
+const goalXp = () => S.goalXp || 100;
+function rankOf(xp){ let r=0; RANKS.forEach((k,i)=>{ if(xp>=k.xp) r=i; }); return r; }
+
+let NODES = null;
+function allNodes(){
+  if(NODES) return NODES;
+  NODES=[];
+  SAGA.forEach(ch=>{
+    const [pre,a,b]=ch.src, ids=[];
+    for(let i=a;i<b;i++) ids.push(pre==="c"?"c"+i:pre+"_"+i);
+    const items=ids.map(id=>ITEMS.find(it=>it.id===id)).filter(Boolean);
+    const nL=Math.max(1,Math.round(items.length/8)), lessons=[];
+    for(let k=0;k<nL;k++) lessons.push(items.slice(Math.round(k*items.length/nL),Math.round((k+1)*items.length/nL)));
+    ch.items=items; ch.nodes=[];
+    let r=0;
+    lessons.forEach((its,k)=>{
+      ch.nodes.push({id:`ch${ch.n}-l${k+1}`,type:"lesson",ch,k:k+1,of:nL,items:its});
+      const bs=STORIES.filter(st=>st.bonus&&st.ch===ch.n);
+      if(bs[k]) ch.nodes.push({id:`ch${ch.n}-b${k+1}`,type:"story",bonus:true,ch,story:bs[k].id});
+      if((k+1)%2===0 && k+1<nL) ch.nodes.push({id:`ch${ch.n}-r${++r}`,type:"practice",ch,upto:k+1});
+    });
+    ch.nodes.push({id:`ch${ch.n}-r${++r}`,type:"practice",ch,upto:nL,final:true});
+    ch.nodes.push({id:`ch${ch.n}-story`,type:"story",ch,story:ch.story});
+    ch.nodes.push({id:`ch${ch.n}-chest`,type:"chest",ch});
+    ch.nodes.forEach(nd=>NODES.push(nd));
+  });
+  return NODES;
+}
+const isDone = id => !!(S.path && S.path[id]);
+function markDone(id){
+  if(!S.path || Object.isFrozen(S.path)) S.path=Object.assign({},S.path||{});
+  S.path[id]=true;
+}
+function currentNode(){ return allNodes().find(nd=>!nd.bonus && !isDone(nd.id)) || null; }
+const coreNodes = ch => ch.nodes.filter(nd=>!nd.bonus);
+function nodeState(nd){
+  if(isDone(nd.id)) return "done";
+  if(nd.bonus){ // facultative : ouverte dès que l'étape d'avant est faite, ne bloque jamais le chemin
+    const i=nd.ch.nodes.indexOf(nd), prev=nd.ch.nodes.slice(0,i).reverse().find(x=>!x.bonus);
+    return prev && isDone(prev.id) ? "open" : "locked";
+  }
+  const c=currentNode(); return c && c.id===nd.id ? "current" : "locked";
+}
+// Convertit la progression existante : leçons déjà vues, histoires lues, révisions dépassées
+function migratePath(){
+  const nodes=allNodes(); let changed=false;
+  nodes.forEach(nd=>{
+    if(isDone(nd.id)) return;
+    if(nd.type==="lesson" && nd.items.every(it=>S.cards[it.id])){ markDone(nd.id); changed=true; }
+    if(nd.type==="story" && (S.stories||{})[nd.story]){ markDone(nd.id); changed=true; }
+  });
+  let laterDone=false;
+  for(let i=nodes.length-1;i>=0;i--){
+    const nd=nodes[i];
+    if(!nd.bonus && (nd.type==="lesson"||nd.type==="story") && isDone(nd.id)) laterDone=true;
+    if(nd.type==="practice" && laterDone && !isDone(nd.id)){ markDone(nd.id); changed=true; }
+  }
+  if(changed) save();
+}
+// Phrases disponibles : celles des leçons faites + la leçon en cours
+function openItems(){
+  const c=currentNode(), out=[];
+  allNodes().forEach(nd=>{ if(nd.type==="lesson" && (isDone(nd.id) || (c&&c.id===nd.id))) out.push(...nd.items); });
+  return out.length ? out : ITEMS.slice(0,8);
+}
+
+/* ---------- Écran d'accueil ---------- */
+let openPop = null, popAuto = true, scrollToCurrent = false, expanded = {};
+function renderHome(){
+  const xp=S.xp||0, ri=rankOf(xp), rk=RANKS[ri], nx=RANKS[ri+1];
+  const pc = nx ? Math.round((xp-rk.xp)/(nx.xp-rk.xp)*100) : 100;
+  const st=currentStreak();
+  $app.innerHTML = `
+    <div class="hud">
+      <span class="hud-streak" title="Série de jours">🔥 <b>${st}</b><small>jour${st>1?"s":""}</small></span>
+      <button class="hud-rank" id="rank-btn" aria-label="Rang ${rk.name}, ${xp} XP. Voir le suivi">
+        <span class="rk-top"><span>${rk.em} <b>${rk.name}</b></span><span class="rk-xp">${xp.toLocaleString("fr-FR")} XP</span></span>
+        <span class="pbar"><i style="width:${pc}%"></i></span>
+        <small>${nx?`Encore ${(nx.xp-xp).toLocaleString("fr-FR")} XP pour devenir ${nx.em} ${nx.name}`:"Tu as atteint le rang le plus haut. Parabéns!"}</small>
+      </button>
+    </div>
+    ${weekTiles()}
+    ${todayCard()}
+    ${rankUpBanner()}
+    ${reviewCard()}
+    ${continueCard()}
+    <div class="hub">
+      <button class="hub-tile" id="go-path"><span class="ic">🗺️</span><strong>Mon chemin</strong><small>${pathSummary()}</small></button>
+      <button class="hub-tile" id="go-stories"><span class="ic">📖</span><strong>Histoires</strong><small>${storySummary()}</small></button>
+      <button class="hub-tile" id="go-practice"><span class="ic">🎯</span><strong>S'entraîner</strong><small>Oreille, puzzle, révision libre</small></button>
+      <button class="hub-tile" id="go-cad"><span class="ic">📒</span><strong>Carnet de la avó</strong><small>${CADERNO.filter((e,i)=>isDone(`ch${i+1}-chest`)).length} / ${CADERNO.length} expressions</small></button>
+    </div>
+    ${hasVoice()?"":`<p class="warn">Aucune voix portugaise détectée sur cet appareil : l'audio risque d'être absent ou avec un accent étrange. Tu peux en installer une dans les réglages de synthèse vocale de ton téléphone.</p>`}
+    <p class="sync" id="sync-badge"></p>`;
+  document.getElementById("today-card").onclick=renderStats;
+  document.getElementById("week-tiles").onclick=renderStats;
+  document.getElementById("rank-btn").onclick=renderStats;
+  const rv=document.getElementById("go-review"); if(rv) rv.onclick=()=>start("review");
+  const cn=document.getElementById("go-next"); if(cn) cn.onclick=()=>runNode(cn.dataset.node);
+  document.getElementById("go-path").onclick=renderPath;
+  document.getElementById("go-stories").onclick=renderStories;
+  document.getElementById("go-practice").onclick=renderPractice;
+  document.getElementById("go-cad").onclick=renderCaderno;
+  refreshSyncBadge();
+}
+function pathSummary(){
+  const all=allNodes().filter(nd=>!nd.bonus), done=all.filter(nd=>isDone(nd.id)).length;
+  const cur=currentNode();
+  return cur ? `Chapitre ${cur.ch.n} sur ${SAGA.length} · ${Math.round(done/all.length*100)} %` : "Saga terminée 🎉";
+}
+function storySummary(){
+  const open=STORIES.filter(storyOpen).length, read=STORIES.filter(st=>storyState(st.id)).length;
+  const fresh=STORIES.filter(st=>storyOpen(st)&&!storyState(st.id)).length;
+  return fresh ? `${fresh} nouvelle${fresh>1?"s":""} à lire` : `${read} lue${read>1?"s":""} sur ${STORIES.length}`;
+}
+function continueCard(){
+  const cur=currentNode();
+  if(!cur) return `<div class="next-card done"><p class="big">Saga terminée 🎉</p><p class="prompt">Tu as fini « Um verão em Portugal ». Garde le rythme avec les révisions du jour.</p></div>`;
+  const ch=cur.ch, core=coreNodes(ch), doneN=core.filter(nd=>isDone(nd.id)).length, pc=Math.round(doneN/core.length*100);
+  const btn = cur.type==="chest" ? `Ouvrir le coffre 🎁 +${XP.chest} XP` : `Continuer · jusqu'à +${nodeXp(cur)} XP`;
+  return `<div class="next-card">
+    <div class="nc-top"><span class="nc-em">${ch.emoji}</span>
+      <span class="nc-txt"><small>Chapitre ${ch.n} · ${esc(ch.title)}</small><strong>${esc(nodeLabel(cur))}</strong><span>${nodeDesc(cur)}</span></span></div>
+    <span class="pbar"><i style="width:${pc}%"></i></span>
+    <small class="nc-pc">Chapitre ${ch.n} : ${doneN} étape${doneN>1?"s":""} sur ${core.length}</small>
+    <button class="btn" id="go-next" data-node="${cur.id}">${btn}</button></div>`;
+}
+function renderPath(){
+  session=null; popAuto=true;
+  const c=currentNode(); openPop = c ? c.id : null;
+  $app.innerHTML=`<div class="top"><button class="back" id="back" aria-label="Retour">←</button><strong>Um verão em Portugal</strong></div>
+    <p class="lead">Ton chemin, chapitre par chapitre. Touche une étape pour la lancer ou la refaire.</p>
+    <div class="saga" id="saga">${sagaHTML()}</div>`;
+  document.getElementById("back").onclick=render;
+  bindSaga();
+  const el=document.querySelector(".node.current");
+  if(el && el.scrollIntoView) el.scrollIntoView({block:"center"}); else window.scrollTo(0,0);
+}
+function renderPractice(){
+  session=null;
+  $app.innerHTML=`<div class="top"><button class="back" id="back" aria-label="Retour">←</button><strong>S'entraîner</strong></div>
+    <p class="lead">Sur les phrases que tu as déjà vues, sans toucher à ton planning de révision · +${XP.free} XP par bonne réponse.</p>
+    <div class="modes">
+      <button class="mode" data-go="listen"><span class="ic">🎧</span>
+        <span><strong>Oreille</strong><small>Écoute une phrase et trouve son sens</small></span></button>
+      <button class="mode" data-go="puzzle"><span class="ic">🧩</span>
+        <span><strong>Puzzle</strong><small>Remets les mots dans l'ordre</small></span></button>
+      <button class="mode" data-go="free"><span class="ic">🗂️</span>
+        <span><strong>Révision libre</strong><small>Repasse des phrases au hasard</small></span></button>
+    </div>
+    <p class="tip">Le principe : des phrases entières qu'on utilise vraiment, entendues avant d'être lues, et revues juste au moment où tu allais les oublier. 10 minutes par jour suffisent.</p>`;
+  document.getElementById("back").onclick=render;
+  $app.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>start(b.dataset.go));
+  window.scrollTo(0,0);
+}
+function rankUpBanner(){
+  const ri=rankOf(S.xp||0);
+  if(S.rankSeen===undefined){ S.rankSeen=ri; return ""; }
+  if(ri<=S.rankSeen) return "";
+  S.rankSeen=ri; save();
+  return `<div class="levelup">🎉 Nouveau titre : ${RANKS[ri].em} ${RANKS[ri].name} ! Continua assim.</div>`;
+}
+function reviewCard(){
+  const due=dueCards().length;
+  if(due) return `<button class="review-cta" id="go-review">
+    <span class="ic">🔁</span>
+    <span class="rv-txt"><strong>Révisions du jour</strong><small>${due} phrase${due>1?"s":""} à revoir avant de les oublier · +${XP.review} XP chacune</small></span>
+    <span class="due">${due}</span></button>`;
+  const t=today()+DAY, tom=ITEMS.filter(it=>S.cards[it.id]&&S.cards[it.id].due<=t).length;
+  return `<p class="review-ok">✓ Révisions à jour${tom?` · ${tom} phrase${tom>1?"s":""} à revoir demain`:""}</p>`;
+}
+const OFFS=[0,52,78,52,0,-52,-78,-52];
+const NODE_ICON={lesson:"★",practice:"↻",story:"📖",chest:"🎁"};
+function nodeLabel(nd){
+  if(nd.type==="lesson") return `Leçon ${nd.k} sur ${nd.of}`;
+  if(nd.type==="practice") return nd.final?"Révision du chapitre":"Révision";
+  if(nd.type==="story") return (nd.bonus?"Histoire bonus : ":"Histoire : ")+(STORIES.find(s=>s.id===nd.story)||{}).title;
+  return "Coffre du chapitre";
+}
+function nodeDesc(nd){
+  if(nd.type==="lesson") return `${nd.items.length} phrases, dont « ${esc(nd.items[0].pt)} »`;
+  if(nd.type==="practice") return "Oreille, puzzle et cartes sur les phrases du chapitre";
+  if(nd.type==="story") return esc((STORIES.find(s=>s.id===nd.story)||{}).fr||"");
+  return "Une expression de la avó pour ton carnet";
+}
+function nodeXp(nd){
+  if(nd.type==="lesson") return nd.items.length*XP.lesson+XP.nodeBonus;
+  if(nd.type==="practice") return 10*XP.practice+XP.nodeBonus;
+  if(nd.type==="story") return 50;
+  return XP.chest;
+}
+function tileSVG(){
+  return `<svg viewBox="0 0 60 60" aria-hidden="true"><rect class="t-bg" x="2" y="2" width="56" height="56" rx="10"/>
+    <path class="t-mo" d="M30 6 Q43 30 30 54 Q17 30 30 6 Z M6 30 Q30 17 54 30 Q30 43 6 30 Z"/></svg>`;
+}
+function sagaHTML(){
+  const cur=currentNode(), curCh=cur?cur.ch.n:SAGA.length+1;
+  allNodes();
+  return SAGA.map(ch=>{
+    const core=coreNodes(ch), doneN=core.filter(nd=>isDone(nd.id)).length, all=core.length;
+    const bonusTotal=ch.nodes.length-all, bonusDone=ch.nodes.filter(nd=>nd.bonus&&isDone(nd.id)).length;
+    const complete=doneN===all, locked=ch.n>curCh;
+    const head=`<button class="ch-head ${locked?"locked":""} ${complete?"complete":""}" data-ch="${ch.n}" ${locked?"disabled":""}>
+      <span class="ch-em">${ch.emoji}</span>
+      <span class="ch-txt"><small>Chapitre ${ch.n}</small><strong>${esc(ch.title)}</strong><span>${locked?`🔒 Termine le chapitre ${ch.n-1} pour l'ouvrir`:esc(ch.fr)}</span></span>
+      <span class="ch-count">${complete?"✓":`${doneN}/${all}`}${!locked&&bonusTotal?`<small class="ch-bonus">📖 ${bonusDone}/${bonusTotal}</small>`:""}</span></button>`;
+    const show = !locked && (!complete || expanded[ch.n]);
+    if(!show) return `<section class="chapter">${head}</section>`;
+    const nodes=ch.nodes.map((nd,i)=>{
+      const stt=nodeState(nd), off=OFFS[i%OFFS.length];
+      const pop = openPop===nd.id && stt!=="locked" ? popHTML(nd,stt) : "";
+      return `<div class="node-row">
+        <button class="node ${nd.type} ${nd.bonus?"bonus":""} ${stt}" data-node="${nd.id}" style="--x:${off}px" aria-label="${esc(nodeLabel(nd))}, ${stt==="done"?"terminé":stt==="current"?"à faire maintenant":stt==="open"?"disponible, facultatif":"verrouillé"}">
+          ${tileSVG()}<span class="n-ic">${stt==="locked"?"🔒":NODE_ICON[nd.type]}</span>
+          ${stt==="done"?`<span class="n-ok">✓</span>`:""}</button>${pop}</div>`;
+    }).join("");
+    return `<section class="chapter">${head}<div class="nodes">${nodes}</div></section>`;
+  }).join("");
+}
+function popHTML(nd,stt){
+  const replay = stt==="done";
+  let btn;
+  if(nd.type==="chest") btn = replay ? `<button class="btn" data-run="${nd.id}">Relire l'expression</button>` : `<button class="btn" data-run="${nd.id}">Ouvrir le coffre +${XP.chest} XP</button>`;
+  else btn = `<button class="btn" data-run="${nd.id}">${replay?"Refaire (sans bonus)":`Commencer · jusqu'à +${nodeXp(nd)} XP`}</button>`;
+  return `<div class="pop"><strong>${esc(nodeLabel(nd))}</strong><p>${nodeDesc(nd)}</p>${btn}</div>`;
+}
+function bindSaga(){
+  $app.querySelectorAll("[data-node]").forEach(b=>b.onclick=()=>{
+    const nd=allNodes().find(x=>x.id===b.dataset.node);
+    if(nodeState(nd)==="locked"){ toast(nd.bonus?"🔒 Histoire bonus : termine d'abord la leçon juste avant":"🔒 Termine d'abord les étapes précédentes"); return; }
+    popAuto=false; openPop = openPop===nd.id ? "" : nd.id;
+    document.getElementById("saga").innerHTML=sagaHTML(); bindSaga();
+  });
+  $app.querySelectorAll("[data-ch]").forEach(b=>b.onclick=()=>{
+    const n=+b.dataset.ch, ch=SAGA[n-1];
+    if(coreNodes(ch).every(nd=>isDone(nd.id))){ expanded[n]=!expanded[n]; document.getElementById("saga").innerHTML=sagaHTML(); bindSaga(); }
+  });
+  $app.querySelectorAll("[data-run]").forEach(b=>b.onclick=()=>runNode(b.dataset.run));
+}
+function runNode(id){
+  const nd=allNodes().find(x=>x.id===id);
+  popAuto=true; scrollToCurrent=true;
+  if(nd.type==="lesson") return startLesson(nd);
+  if(nd.type==="practice") return startPractice(nd);
+  if(nd.type==="story") return playStory(nd.story,nd);
+  return openChest(nd);
+}
+
+/* ---------- Coffres et Caderno da avó ---------- */
+function openChest(nd){
+  session={mode:"chest",shownAt:Date.now(),good:0};
+  const e=CADERNO[nd.ch.n-1], first=!isDone(nd.id);
+  $app.innerHTML=`<div class="top"><button class="back" id="back" aria-label="Retour">←</button><strong>Coffre du chapitre ${nd.ch.n}</strong></div>
+    <div class="chest-stage"><button class="chest-btn" id="chest" aria-label="Ouvrir le coffre">🎁</button>
+    <p class="prompt" id="chest-hint">${first?"Touche le coffre pour l'ouvrir":"Touche le coffre pour relire l'expression"}</p></div>
+    <div id="chest-out"></div>`;
+  document.getElementById("back").onclick=render;
+  document.getElementById("chest").onclick=function(){
+    if(this.dataset.open) return; this.dataset.open=1;
+    this.classList.add("opening");
+    setTimeout(()=>{
+      this.textContent="📒";
+      if(first){
+        markDone(nd.id); touchStreak();
+        S.xp+=XP.chest; dayRec().xp+=XP.chest; save();
+      }
+      document.getElementById("chest-hint").textContent = first ? `+${XP.chest} XP · ajouté à ton Caderno da avó` : "Dans ton Caderno da avó";
+      document.getElementById("chest-out").innerHTML=`<div class="cad-card"><small>Expression de la avó</small>
+        <p class="big pt">${esc(e.pt)}</p><p class="cad-fr">${esc(e.fr)}</p><p class="note">${esc(e.note)}</p>${audioBtns(e.pt)}</div>
+        <div class="row"><button class="btn alt" id="to-cad">Voir le carnet</button><button class="btn" id="chest-next">Continuer le chemin</button></div>`;
+      bindAudio(); speak(e.pt,false,1.3);
+      document.getElementById("to-cad").onclick=renderCaderno;
+      document.getElementById("chest-next").onclick=render;
+    },650);
+  };
+}
+function renderCaderno(){
+  session=null;
+  allNodes();
+  const rows=CADERNO.map((e,i)=>{
+    const got=isDone(`ch${i+1}-chest`);
+    return got ? `<div class="cad-card"><small>Chapitre ${i+1} · ${esc(SAGA[i].title)}</small>
+        <p class="cad-pt"><button class="say" data-say="${esc(e.pt)}" aria-label="Écouter">🔊</button>${esc(e.pt)}</p>
+        <p class="cad-fr">${esc(e.fr)}</p><p class="cad-note">${esc(e.note)}</p></div>`
+      : `<div class="cad-card locked"><small>Chapitre ${i+1} · ${esc(SAGA[i].title)}</small><p class="cad-pt">🔒 Expression à découvrir</p><p class="cad-note">Ouvre le coffre de fin de chapitre pour la débloquer.</p></div>`;
+  }).join("");
+  const n=CADERNO.filter((e,i)=>isDone(`ch${i+1}-chest`)).length;
+  $app.innerHTML=`<div class="top"><button class="back" id="back" aria-label="Retour">←</button><strong>Caderno da avó</strong></div>
+    <p class="lead">Les expressions que la avó t'a transmises · ${n} / ${CADERNO.length}</p>
+    <div class="cad-list">${rows}</div>`;
+  document.getElementById("back").onclick=render;
+  $app.querySelectorAll("[data-say]").forEach(b=>b.onclick=()=>speak(b.dataset.say,false,1.3));
+  window.scrollTo(0,0);
+}
+let toastTimer=null;
+function toast(msg){
+  let t=document.getElementById("toast");
+  if(!t){ t=document.createElement("div"); t.id="toast"; t.className="toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
+  t.textContent=msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"),1800);
+}
+function weekTiles(){
+  const g=goalXp(); let html="", done=0;
+  const now=new Date(); now.setHours(12,0,0,0);
+  const monday=now.getTime()-((now.getDay()+6)%7)*DAY;
+  const names=["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+  for(let j=0;j<7;j++){
+    const t=monday+j*DAY, isToday=dkey(t)===dkey(), isFuture=t>now.getTime();
+    const d=(S.days||{})[dkey(t)], n=d?d.n:0, x=d?d.xp||0:0;
+    if(n) done++;
+    const cls=(n?"on ":"")+(x>=g?"goal ":"")+(isToday?"is-today ":"")+(isFuture?"future":"");
+    const name=new Date(t).toLocaleDateString("fr-FR",{weekday:"long"});
+    const state= isFuture?"à venir":x>=g?"objectif atteint, "+x+" XP":n?x+" XP":"pas de pratique";
+    html+=`<span class="day ${cls}" title="${name} : ${state}">
+      <svg viewBox="0 0 60 60" aria-hidden="true">
+        <rect class="t-bg" x="1" y="1" width="58" height="58" rx="6"/>
+        <path class="t-mo" d="M30 8 Q42 30 30 52 Q18 30 30 8 Z M8 30 Q30 18 52 30 Q30 42 8 30 Z"/>
+        <circle class="t-dot" cx="30" cy="30" r="5"/>
+      </svg>
+      <span class="lbl">${names[j]}</span></span>`;
+  }
+  return `<button class="week" id="week-tiles" aria-label="Ta semaine : ${done} jour${done>1?"s":""} de pratique sur 7. Voir le suivi">${html}</button>`;
+}
+function todayCard(){
+  const d=S.days&&S.days[dkey()]||{xp:0}, x=d.xp||0, g=goalXp(), pc=Math.min(100,Math.round(x/g*100));
+  const msg = x>=g ? "Objectif du jour atteint ✅" : x ? `Encore ${g-x} XP pour l'objectif du jour` : "Objectif du jour";
+  return `<button class="today" id="today-card" aria-label="Voir le suivi par jour">
+    <span class="lbl"><span>${msg}</span><b>${x} / ${g} XP</b></span>
+    <span class="pbar ${x>=g?"done":""}"><i style="width:${pc}%"></i></span></button>`;
+}
+
+/* ---------- Suivi par jour ---------- */
+function bestStreak(){
+  const keys=Object.keys(S.days||{}).filter(k=>S.days[k].n>0).sort();
+  let best=0,cur=0,prev=null;
+  for(const k of keys){
+    const t=new Date(k+"T12:00:00").getTime();
+    cur = (prev!==null && Math.round((t-prev)/DAY)===1) ? cur+1 : 1;
+    best=Math.max(best,cur); prev=t;
+  }
+  return best;
+}
+function currentStreak(){
+  // compte les jours consécutifs actifs jusqu'à aujourd'hui (ou hier si rien aujourd'hui encore)
+  let t=Date.now(), n=0;
+  if(!(S.days[dkey(t)]&&S.days[dkey(t)].n)) t-=DAY;
+  while(S.days[dkey(t)]&&S.days[dkey(t)].n){ n++; t-=DAY; }
+  return n;
+}
+function renderStats(){
+  session=null;
+  if(!S.days) S.days={};
+  const g=goalXp(), now=Date.now();
+  const td=S.days[dkey()]||{n:0,good:0,nw:0,sec:0};
+  const all=Object.values(S.days);
+  const totalN=all.reduce((a,d)=>a+d.n,0), totalSec=all.reduce((a,d)=>a+d.sec,0);
+  const mastered=Object.values(S.cards).filter(c=>c.box>=3).length;
+  const active=all.filter(d=>d.n>0).length;
+
+  // Calendrier : 12 semaines, du lundi au dimanche
+  const t0=new Date(); t0.setHours(12,0,0,0);
+  const dow=(t0.getDay()+6)%7; // 0 = lundi
+  const start=t0.getTime()-(dow+7*11)*DAY;
+  let cells="";
+  for(let i=0;i<84;i++){
+    const t=start+i*DAY, k=dkey(t), d=S.days[k];
+    if(t>now){ cells+=`<span class="fut"></span>`; continue; }
+    const n=d?d.xp||0:0, lvl = n===0?"":n>=g?"l3":n>=g/2?"l2":"l1";
+    const label=new Date(t).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"})+" : "+n+" XP";
+    cells+=`<span class="${lvl} ${k===dkey()?"now":""}" title="${label}" aria-label="${label}"></span>`;
+  }
+
+  // Graphique : 14 derniers jours
+  const W=340,H=150,pb=22,pt=10, bars=[];
+  for(let i=13;i>=0;i--){ const t=now-i*DAY; bars.push({t,n:(S.days[dkey(t)]||{xp:0}).xp||0}); }
+  const max=Math.max(g,...bars.map(b=>b.n))*1.1, bw=W/14;
+  const y=v=>pt+(H-pb-pt)*(1-v/max);
+  const svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="XP gagnés sur les 14 derniers jours">
+    ${bars.map((b,i)=>`<rect x="${i*bw+4}" y="${y(b.n)}" width="${bw-8}" height="${H-pb-y(b.n)}" rx="3" fill="${b.n>=g?"var(--cobalt)":"color-mix(in srgb,var(--cobalt) 45%,var(--line))"}"/>
+      ${b.n?`<text x="${i*bw+bw/2}" y="${y(b.n)-3}" text-anchor="middle" font-size="9" fill="var(--muted)">${b.n}</text>`:""}
+      <text x="${i*bw+bw/2}" y="${H-6}" text-anchor="middle" font-size="10" fill="var(--muted)">${new Date(b.t).toLocaleDateString("fr-FR",{weekday:"narrow"})}</text>`).join("")}
+    <line x1="0" x2="${W}" y1="${y(g)}" y2="${y(g)}" stroke="var(--tram)" stroke-width="2" stroke-dasharray="5 4"/>
+  </svg>`;
+
+  // Journal des 7 derniers jours
+  let rows="";
+  for(let i=0;i<7;i++){
+    const t=now-i*DAY, d=S.days[dkey(t)];
+    const name = i===0?"Aujourd'hui":i===1?"Hier":new Date(t).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"short"});
+    if(!d||!d.n){ rows+=`<div class="dayrow empty"><span class="d">${name}</span><span class="n">—</span><small>Pas de pratique</small></div>`; continue; }
+    rows+=`<div class="dayrow"><span class="d">${name}${(d.xp||0)>=g?" ✅":""}</span><span class="n">${d.xp||0} XP</span>
+      <small>${d.n} exercices · ${Math.round(d.good/d.n*100)} % de réussite · ${d.nw} nouvelle${d.nw>1?"s":""} phrase${d.nw>1?"s":""} · ${Math.max(1,Math.round(d.sec/60))} min</small></div>`;
+  }
+
+  $app.innerHTML = `<div class="top"><button class="back" id="back" aria-label="Retour">←</button><strong>Ton suivi</strong></div>
+    ${todayCard()}
+    <div class="goal">Objectif quotidien :
+      ${[50,100,200].map(v=>`<button data-goal="${v}" aria-pressed="${v===g}">${v} XP</button>`).join("")}</div>
+
+    <h2>En chiffres</h2>
+    <div class="kpis">
+      <div class="kpi"><b>${currentStreak()}</b><small>jours d'affilée</small></div>
+      <div class="kpi"><b>${bestStreak()}</b><small>meilleure série</small></div>
+      <div class="kpi"><b>${active}</b><small>jours pratiqués</small></div>
+      <div class="kpi"><b>${totalN}</b><small>exercices au total</small></div>
+      <div class="kpi"><b>${mastered}</b><small>phrases bien ancrées</small></div>
+      <div class="kpi"><b>${Math.round(totalSec/60)}</b><small>minutes au total</small></div>
+    </div>
+
+    <h2>Les 14 derniers jours</h2>
+    <div class="chart">${svg}</div>
+    <p class="legend">Barre pleine = objectif atteint · ligne jaune = ton objectif</p>
+
+    <h2>Tes 12 dernières semaines</h2>
+    <div class="heat-wrap"><div class="heat">${cells}</div></div>
+    <div class="legend">Moins <span style="background:var(--line)"></span><span style="background:color-mix(in srgb,var(--cobalt) 35%,var(--line))"></span><span style="background:color-mix(in srgb,var(--cobalt) 70%,var(--line))"></span><span style="background:var(--cobalt);box-shadow:inset 0 0 0 2px var(--tram)"></span> Objectif</div>
+
+    <h2>Journal de la semaine</h2>
+    <div class="days">${rows}</div>
+    <h2>Sauvegarde</h2>
+    <p class="sync" id="sync-badge"></p>
+    <div class="backup">
+      <p>Pour changer d'appareil ou ne rien perdre : copie ton code de sauvegarde et colle-le sur l'autre appareil. Les deux progressions sont fusionnées, rien n'est écrasé.</p>
+      <div class="row" style="margin-top:0"><button class="btn alt" id="bk-copy">Copier mon code</button><button class="btn alt" id="bk-show">Coller un code</button></div>
+      <div id="bk-zone" class="hidden" style="margin-top:10px">
+        <textarea id="bk-text" placeholder="Colle ton code ici" aria-label="Code de sauvegarde"></textarea>
+        <div class="row" style="margin-top:8px"><button class="btn" id="bk-import">Importer</button></div>
+      </div>
+      <p class="msg" id="bk-msg"></p>
+    </div>
+    <p class="tip">Une « phrase bien ancrée » est une phrase que tu as réussie plusieurs fois d'affilée, espacées de plusieurs jours. Le temps est estimé à partir de tes réponses (plafonné à 90 s par exercice).</p>`;
+  document.getElementById("back").onclick=render;
+  $app.querySelectorAll("[data-goal]").forEach(b=>b.onclick=()=>{ S.goalXp=+b.dataset.goal; save(); renderStats(); });
+  refreshSyncBadge();
+  const msg=t=>{ document.getElementById("bk-msg").textContent=t; };
+  document.getElementById("bk-copy").onclick=async()=>{
+    const code="FALA1:"+btoa(unescape(encodeURIComponent(JSON.stringify(S))));
+    try{ await navigator.clipboard.writeText(code); msg("Code copié ✅ Garde-le dans tes notes ou envoie-le toi."); }
+    catch(e){ document.getElementById("bk-zone").classList.remove("hidden"); const ta=document.getElementById("bk-text"); ta.value=code; ta.select(); msg("Copie automatique impossible : sélectionne le texte ci-dessus et copie-le."); }
+  };
+  document.getElementById("bk-show").onclick=()=>{ document.getElementById("bk-zone").classList.remove("hidden"); document.getElementById("bk-text").value=""; document.getElementById("bk-text").focus(); };
+  document.getElementById("bk-import").onclick=()=>{
+    try{
+      const raw=document.getElementById("bk-text").value.trim().replace(/^FALA1:/,"");
+      const data=JSON.parse(decodeURIComponent(escape(atob(raw))));
+      if(!data||typeof data!=="object"||!data.cards) throw 0;
+      S=mergeState(S,data); save(); renderStats(); document.getElementById("bk-msg").textContent="Progression importée et fusionnée ✅";
+    }catch(e){ msg("Ce code n'est pas valide. Vérifie qu'il est copié en entier."); }
+  };
+  window.scrollTo(0,0);
+}
+
+/* ---------- Sessions ---------- */
+let session=null;
+const ex = (it,kind) => ({it,kind});
+const puzzleOk = it => !it.pt.includes("…") && txt(it).split(" ").length>=3;
+function start(mode){
+  let queue, opts={};
+  if(mode==="review"){
+    queue=shuffle(dueCards()).slice(0,20).map(it=>ex(it,"cards"));
+    if(!queue.length){ renderAllDone(); return; }
+    opts={xpPer:XP.review, xpMiss:XP.reviewMiss, label:"Révisions du jour"};
+  } else if(mode==="free"){
+    queue=shuffle(ITEMS.filter(it=>S.cards[it.id])).slice(0,10).map(it=>ex(it,"cards"));
+    opts={free:true, xpPer:XP.free, label:"Révision libre"};
+  } else if(mode==="listen"){
+    queue=shuffle(learnedPool()).slice(0,10).map(it=>ex(it,"listen"));
+    opts={xpPer:XP.free, label:"Oreille"};
+  } else {
+    let pool=learnedPool().filter(puzzleOk); if(pool.length<3) pool=openItems().filter(puzzleOk);
+    queue=shuffle(pool).slice(0,8).map(it=>ex(it,"puzzle"));
+    opts={xpPer:XP.free, label:"Puzzle"};
+  }
+  session=Object.assign({mode,queue,i:0,good:0,xp:0,combo:0},opts);
+  next();
+}
+function startLesson(nd){
+  const replay=isDone(nd.id), its=nd.items;
+  const drills=[...shuffle(its).slice(0,3).map(it=>ex(it,"listen")), ...shuffle(its.filter(puzzleOk)).slice(0,2).map(it=>ex(it,"puzzle"))];
+  const queue=[...its.map(it=>ex(it,"cards")), ...shuffle(drills)];
+  session={mode:"lesson",node:nd,queue,i:0,good:0,xp:0,combo:0,free:replay,xpPer:XP.lesson,label:nodeLabel(nd)};
+  next();
+}
+function startPractice(nd){
+  const its=nd.ch.nodes.filter(x=>x.type==="lesson"&&x.k<=nd.upto).flatMap(x=>x.items);
+  const pool=its.length?its:openItems();
+  const queue=shuffle([
+    ...shuffle(pool).slice(0,4).map(it=>ex(it,"cards")),
+    ...shuffle(pool).slice(0,3).map(it=>ex(it,"listen")),
+    ...shuffle(pool.filter(puzzleOk)).slice(0,3).map(it=>ex(it,"puzzle"))]);
+  session={mode:"practice",node:nd,queue,i:0,good:0,xp:0,combo:0,free:true,xpPer:XP.practice,label:nodeLabel(nd)};
+  next();
+}
+function renderAllDone(){
+  $app.innerHTML=topBar(0)+`<div class="card end"><p class="big">Tout est révisé 🎉</p>
+    <p class="prompt">Aucune phrase à revoir pour l'instant. Tu peux avancer sur ton chemin ou t'entraîner librement.</p></div>
+    <div class="row"><button class="btn" id="to-path">Retour à l'accueil</button><button class="btn alt" id="free">Révision libre</button></div>`;
+  bindTop();
+  document.getElementById("to-path").onclick=render;
+  document.getElementById("free").onclick=()=>start("free");
+}
+function topBar(p){
+  const s=session;
+  return `<div class="top"><button class="back" id="back" aria-label="Retour">←</button><div class="bar"><i style="width:${p}%"></i></div>
+    ${s&&s.xp!==undefined?`<span class="sess-xp" id="sess-xp">+${s.xp} XP</span>`:""}</div>`;
+}
+function bindTop(){ document.getElementById("back").onclick=()=>{ window.speechSynthesis&&speechSynthesis.cancel(); render(); }; }
+function next(){
+  const s=session;
+  if(s.i>=s.queue.length) return finish();
+  const e=s.queue[s.i], p=Math.round(s.i/s.queue.length*100);
+  s.shownAt=Date.now();
+  ({cards:showCard,listen:showListen,puzzle:showPuzzle})[e.kind](e.it,p);
+}
+function award(ok){
+  touchStreak();
+  const s=session, d=dayRec();
+  d.n++; d.sec += Math.min(90,Math.max(1,(Date.now()-(s.shownAt||Date.now()))/1000));
+  let gain=0;
+  if(ok){
+    d.good++; s.good++; s.combo=(s.combo||0)+1; gain=s.xpPer||10;
+    if(s.combo%5===0){ gain+=XP.combo; toast(`🔥 Combo ×${s.combo} · +${XP.combo} XP bonus`); }
+  } else { s.combo=0; gain=s.xpMiss||0; }
+  if(gain){ S.xp=(S.xp||0)+gain; d.xp=(d.xp||0)+gain; s.xp=(s.xp||0)+gain; }
+  const el=document.getElementById("sess-xp"); if(el) el.textContent=`+${s.xp} XP`;
+  save();
+}
+function finish(){
+  const s=session; let title="Muito bem!", sub="";
+  if(s.node && !isDone(s.node.id)){
+    markDone(s.node.id);
+    S.xp+=XP.nodeBonus; dayRec().xp+=XP.nodeBonus; s.xp+=XP.nodeBonus; save();
+    sub=`Bonus d'étape : +${XP.nodeBonus} XP`;
+  }
+  if(s.mode==="lesson") title="Leçon terminée !";
+  if(s.mode==="practice") title="Révision terminée !";
+  if(s.mode==="review") title="Révisions faites !";
+  const ri=rankOf(S.xp), rk=RANKS[ri], nx=RANKS[ri+1];
+  const pc = nx ? Math.round((S.xp-rk.xp)/(nx.xp-rk.xp)*100) : 100;
+  const total=s.queue.length;
+  $app.innerHTML = topBar(100)+`<div class="card end">
+    <p class="big">${title}</p>
+    <p class="xp-big">+${s.xp} XP</p>
+    <p class="prompt">${s.good} / ${total} réussies${sub?` · ${sub}`:""}</p>
+    <div class="fin-rank"><span>${rk.em} ${rk.name}</span><span class="pbar"><i style="width:${pc}%"></i></span>
+      <small>${nx?`${(nx.xp-S.xp).toLocaleString("fr-FR")} XP avant ${nx.name}`:"Rang maximum"}</small></div></div>
+    <div class="row">${s.node?`<button class="btn" id="home">Continuer</button>`:`<button class="btn alt" id="again">Encore une</button><button class="btn" id="home">Accueil</button>`}</div>`;
+  bindTop();
+  const ag=document.getElementById("again"); if(ag) ag.onclick=()=>start(s.mode);
+  document.getElementById("home").onclick=render;
+}
+const audioBtns = t => `<div class="audio"><button data-say="${esc(t)}">🔊 Écouter</button><button data-say="${esc(t)}" data-slow="1">🐢 Lentement</button></div>`;
+function bindAudio(){ $app.querySelectorAll("[data-say]").forEach(b=>b.onclick=()=>speak(b.dataset.say,!!b.dataset.slow)); }
+
+/* Mode 1 : cartes à répétition espacée */
+function showCard(it,p){
+  const isNew=!S.cards[it.id];
+  const free = session.free || (session.mode==="lesson" && !isNew);
+  $app.innerHTML = topBar(p)+`<div class="card">
+    <p class="prompt">${isNew?"Nouvelle phrase · essaie de deviner avant de retourner":free?"Entraînement · comment dirais-tu…":"Comment dirais-tu…"}</p>
+    <p class="big">${esc(it.fr)}</p>
+    <div id="back-side" class="hidden">
+      <p class="big pt">${esc(txt(it))}</p>
+      ${audioBtns(txt(it))}
+      <p class="prompt" style="margin-top:10px">Répète-la à voix haute, deux fois.</p>
+      ${it.note?`<p class="note">${esc(it.note)}</p>`:""}
+    </div></div>
+    <div class="row" id="reveal-row"><button class="btn" id="reveal">Voir la réponse</button></div>
+    <div class="row hidden" id="grade-row">
+      <button class="btn ko" data-g="0">À revoir</button>
+      <button class="btn alt" data-g="1">Presque</button>
+      <button class="btn ok" data-g="2">Facile</button>
+    </div>`;
+  bindTop();
+  document.getElementById("reveal").onclick=()=>{
+    document.getElementById("back-side").classList.remove("hidden");
+    document.getElementById("reveal-row").classList.add("hidden");
+    document.getElementById("grade-row").classList.remove("hidden");
+    bindAudio(); speak(txt(it));
+  };
+  $app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{
+    const g=+b.dataset.g;
+    if(free){ award(g>0); session.i++; return next(); }
+    if(isNew){ dayRec().nw++; }
+    const prev=S.cards[it.id]||{box:0,due:0};
+    const c={box:prev.box||0,due:prev.due||0};
+    c.box = g===0 ? 0 : g===1 ? Math.max(1,c.box) : Math.min(INTERVALS.length-1,c.box+1);
+    c.due = today() + (g===0 ? 0 : INTERVALS[c.box]*DAY);
+    S.cards[it.id]=c;
+    if(g===0) session.queue.push(ex(it,"cards")); // on la revoit en fin de session
+    award(g>0); session.i++; next();
+  });
+}
+
+/* Mode 2 : écoute */
+function showListen(it,p){
+  let near=openItems().filter(x=>x.id!==it.id&&Math.abs(x.lvl-it.lvl)<=1); if(near.length<3) near=ITEMS.filter(x=>x.id!==it.id&&x.lvl===it.lvl);
+  const opts=shuffle([it,...shuffle(near).slice(0,3)]);
+  $app.innerHTML = topBar(p)+`<div class="card">
+    <p class="prompt">Écoute, puis choisis ce que ça veut dire.</p>
+    ${audioBtns(txt(it))}
+    <p class="big pt hidden" id="reveal-pt">${esc(txt(it))}</p>
+  </div><div class="choices">${opts.map(o=>`<button class="choice" data-id="${o.id}">${esc(o.fr)}</button>`).join("")}</div>
+  <div class="row hidden" id="nx"><button class="btn" id="next">Continuer</button></div>`;
+  bindTop(); bindAudio(); speak(txt(it));
+  let done=false;
+  $app.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{
+    if(done) return; done=true;
+    const ok=b.dataset.id===it.id;
+    b.classList.add(ok?"good":"bad");
+    if(!ok) $app.querySelector(`.choice[data-id="${it.id}"]`).classList.add("good");
+    document.getElementById("reveal-pt").classList.remove("hidden");
+    document.getElementById("nx").classList.remove("hidden");
+    award(ok);
+    document.getElementById("next").onclick=()=>{ session.i++; next(); };
+  });
+}
+
+/* Mode 3 : puzzle */
+function showPuzzle(it,p){
+  const target=txt(it), words=target.replace(/[!?.,]/g,"").split(" ");
+  let pool=shuffle(words.map((w,i)=>({w,i}))), placed=[];
+  $app.innerHTML = topBar(p)+`<div class="card">
+    <p class="prompt">Traduis en remettant les mots dans l'ordre.</p>
+    <p class="big">${esc(it.fr)}</p>
+    <div class="slot" id="slot" aria-label="Ta phrase"></div>
+    <p class="feedback hidden" id="fb"></p>
+  </div><div class="pool" id="pool"></div>
+  <div class="row"><button class="btn" id="check" disabled>Vérifier</button></div>`;
+  bindTop();
+  const draw=()=>{
+    document.getElementById("slot").innerHTML=placed.map((t,k)=>`<button class="tile" data-k="${k}">${esc(t.w)}</button>`).join("");
+    document.getElementById("pool").innerHTML=pool.map((t,k)=>`<button class="tile" data-p="${k}">${esc(t.w)}</button>`).join("");
+    $app.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{ placed.push(pool.splice(+b.dataset.p,1)[0]); draw(); });
+    $app.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{ pool.push(placed.splice(+b.dataset.k,1)[0]); draw(); });
+    document.getElementById("check").disabled=pool.length>0;
+  };
+  draw();
+  document.getElementById("check").onclick=function(){
+    if(this.dataset.state==="done"){ session.i++; return next(); }
+    const ok=clean(placed.map(t=>t.w).join(" "))===clean(target);
+    const fb=document.getElementById("fb");
+    fb.className="feedback "+(ok?"ok":"ko");
+    fb.innerHTML= ok ? "Certo ! 👏" : `Presque. La bonne phrase : <span class="pt">${esc(target)}</span>`;
+    speak(target); award(ok);
+    this.textContent="Continuer"; this.dataset.state="done";
+    $app.querySelectorAll(".tile").forEach(t=>t.disabled=true);
+  };
+}
+
+/* ---------- Histoires en famille ---------- */
+// Étapes : {s, pt, fr, note?} réplique · {t:"reply"} tu choisis ta réponse · {t:"fill"} mot manquant · {t:"quiz"} compréhension
+const CAST = {
+  rosa:{name:"Tia Rosa",av:"👩🏻‍🦱",pitch:1.15},
+  avo:{name:"Avó Lurdes",av:"👵🏻",pitch:1.3},
+  joao:{name:"Primo João",av:"🧔🏻",pitch:.8},
+  ana:{name:"Ana",av:"👩🏽",pitch:1.2},
+  emp:{name:"Empregado",av:"🧑🏻‍🍳",pitch:.9},
+  taxi:{name:"Taxista",av:"🧔🏻‍♂️",pitch:.85},
+  senhora:{name:"Uma senhora",av:"👵🏼",pitch:1.2},
+  func:{name:"Funcionária",av:"👩🏻‍💼",pitch:1.1},
+  ines:{name:"Prima Inês",av:"👧🏻",pitch:1.5},
+  vend:{name:"Vendedor",av:"👨🏻‍🌾",pitch:.8},
+  tu:{name:"Toi",av:"",pitch:1}
+};
+const STORIES = [
+ {id:"s1",lvl:1,emoji:"✈️",title:"Chegada a Lisboa",fr:"Ta tante t'attend à l'aéroport",steps:[
+  {s:"rosa",pt:"Olá! Bem-vindo a Lisboa!",fr:"Bonjour ! Bienvenue à Lisbonne !"},
+  {s:"tu",pt:"Olá, tia! Obrigado!",fr:"Bonjour, tata ! Merci !"},
+  {s:"rosa",pt:"Como estás?",fr:"Comment vas-tu ?"},
+  {t:"reply",ask:"Ta tante te demande comment tu vas. Que réponds-tu ?",opts:["Estou bem, obrigado.","Quanto custa?","À esquerda."],ok:0,fr:"Je vais bien, merci."},
+  {s:"rosa",pt:"Estás com fome?",fr:"Tu as faim ?",note:"« Estar com fome » et « ter fome » veulent dire la même chose."},
+  {s:"tu",pt:"Sim, tenho muita fome!",fr:"Oui, j'ai très faim !"},
+  {s:"rosa",pt:"Então vamos tomar um café e comer um pastel de nata.",fr:"Alors allons prendre un café et manger un pastel de nata."},
+  {s:"emp",pt:"Bom dia! O que desejam?",fr:"Bonjour ! Que désirez-vous ?"},
+  {t:"fill",s:"tu",pt:"Queria um ___, por favor.",fr:"Je voudrais un café, s'il vous plaît.",opts:["café","comboio","bilhete"],ok:0},
+  {s:"emp",pt:"Mais alguma coisa?",fr:"Autre chose ?"},
+  {t:"reply",ask:"Tu as fini. Demande l'addition.",opts:["A conta, por favor.","Onde é a casa de banho?","Bom apetite!"],ok:0,fr:"L'addition, s'il vous plaît."},
+  {s:"rosa",pt:"Não, não! Hoje pago eu.",fr:"Non, non ! Aujourd'hui, c'est moi qui paie."},
+  {s:"tu",pt:"Obrigado, tia! És a melhor.",fr:"Merci, tata ! Tu es la meilleure."},
+  {t:"quiz",ask:"Qui paie l'addition ?",opts:["La tante Rosa","Toi","Le serveur"],ok:0}
+ ]},
+ {id:"s2",lvl:1,emoji:"📞",title:"Ao telefone com a avó",fr:"Tu appelles ta grand-mère",steps:[
+  {s:"avo",pt:"Estou? Quem fala?",fr:"Allô ? Qui est à l'appareil ?",note:"Au Portugal, on décroche souvent le téléphone en disant « Estou? » ou « Está? »."},
+  {s:"tu",pt:"Olá, avó! Sou eu!",fr:"Bonjour, mamie ! C'est moi !"},
+  {s:"avo",pt:"Ai, que bom! Como estás, meu querido?",fr:"Oh, quelle joie ! Comment vas-tu, mon chéri ?"},
+  {t:"reply",ask:"Réponds et demande-lui comment elle va.",opts:["Estou bem! E a avó, como está?","Não percebo.","Uma mesa para dois."],ok:0,fr:"Je vais bien ! Et toi, mamie, comment vas-tu ?",note:"Dans beaucoup de familles portugaises, on parle aux grands-parents à la 3e personne (« a avó está bem? ») par respect. Ça varie selon les familles."},
+  {s:"avo",pt:"Estou bem, graças a Deus. Quando vens a Portugal?",fr:"Je vais bien, Dieu merci. Quand est-ce que tu viens au Portugal ?"},
+  {s:"tu",pt:"Em agosto!",fr:"En août !"},
+  {s:"avo",pt:"Que bom! Vou fazer bacalhau para ti.",fr:"Super ! Je vais te faire de la morue."},
+  {t:"fill",s:"tu",pt:"Tenho muitas ___, avó.",fr:"Tu me manques beaucoup, mamie.",opts:["saudades","fome","sede"],ok:0},
+  {s:"avo",pt:"Eu também, querido. Um beijinho grande!",fr:"Moi aussi, mon chéri. Un gros bisou !"},
+  {t:"reply",ask:"Dis-lui au revoir.",opts:["Um beijinho, avó! Até breve!","Sempre em frente!","Quanto custa?"],ok:0,fr:"Bisous, mamie ! À bientôt !"},
+  {t:"quiz",ask:"Que va préparer la grand-mère ?",opts:["De la morue","Des pastéis de nata","Une soupe"],ok:0}
+ ]},
+ {id:"s3",lvl:2,emoji:"🍲",title:"O almoço de domingo",fr:"Repas de famille chez la avó",steps:[
+  {s:"avo",pt:"O almoço está pronto! Vamos para a mesa!",fr:"Le déjeuner est prêt ! À table !"},
+  {s:"joao",pt:"Finalmente! Que fome!",fr:"Enfin ! J'ai une de ces faims !"},
+  {s:"avo",pt:"Bom apetite a todos!",fr:"Bon appétit à tous !"},
+  {t:"reply",ask:"Que réponds-tu à ta grand-mère ?",opts:["Bom apetite!","Boa noite!","Bom fim de semana!"],ok:0,fr:"Bon appétit !"},
+  {s:"joao",pt:"Gostas de bacalhau?",fr:"Tu aimes la morue ?"},
+  {t:"reply",ask:"Tu adores ça. Que réponds-tu ?",opts:["Adoro bacalhau!","Sou francês.","Onde fica a estação?"],ok:0,fr:"J'adore la morue !"},
+  {s:"avo",pt:"Queres mais?",fr:"Tu en veux encore ?"},
+  {t:"reply",ask:"Tu n'as vraiment plus faim. Que réponds-tu ?",opts:["Não, obrigado, já chega.","Sim, só um bocadinho.","Tenho muita fome!"],ok:0,fr:"Non merci, ça suffit."},
+  {s:"avo",pt:"Já chega? Comeste tão pouco!",fr:"Ça suffit ? Tu as mangé si peu !"},
+  {s:"joao",pt:"A avó acha sempre que comemos pouco.",fr:"Mamie trouve toujours qu'on mange trop peu."},
+  {t:"fill",s:"tu",pt:"Está tudo ___, avó. Obrigado!",fr:"Tout est excellent, mamie. Merci !",opts:["ótimo","longe","perdido"],ok:0},
+  {s:"avo",pt:"De nada, querido. Agora há sobremesa!",fr:"De rien, mon chéri. Maintenant, il y a le dessert !"},
+  {t:"quiz",ask:"Que pense toujours la grand-mère ?",opts:["Qu'on ne mange pas assez","Qu'on mange trop","Que la morue est ratée"],ok:0}
+ ]},
+ {id:"s4",lvl:2,emoji:"🎉",title:"Apresentações",fr:"Ton cousin te présente sa copine",steps:[
+  {s:"joao",pt:"Esta é a Ana, a minha namorada.",fr:"Voici Ana, ma copine."},
+  {s:"ana",pt:"Olá! Tu és o primo francês?",fr:"Salut ! C'est toi le cousin français ?"},
+  {t:"reply",ask:"Présente-toi poliment.",opts:["Sim, sou eu. Muito prazer!","Não, obrigado.","Até amanhã!"],ok:0,fr:"Oui, c'est moi. Enchanté !"},
+  {s:"ana",pt:"Falas muito bem português!",fr:"Tu parles très bien portugais !"},
+  {t:"fill",s:"tu",pt:"Obrigado! Ainda estou a ___.",fr:"Merci ! J'apprends encore.",opts:["aprender","aprendo","aprendi"],ok:0,note:"« Estar a + infinitif » : la forme typique du Portugal pour une action en cours."},
+  {s:"ana",pt:"O que fazes na vida?",fr:"Qu'est-ce que tu fais dans la vie ?"},
+  {t:"reply",ask:"Tu travailles dans l'informatique.",opts:["Trabalho em informática.","Tenho dois filhos.","Bom apetite!"],ok:0,fr:"Je travaille dans l'informatique."},
+  {s:"ana",pt:"Que fixe! Eu sou enfermeira, num hospital em Coimbra.",fr:"Trop bien ! Moi, je suis infirmière, dans un hôpital à Coimbra."},
+  {s:"ana",pt:"E o que gostas de fazer?",fr:"Et qu'est-ce que tu aimes faire ?"},
+  {s:"tu",pt:"Gosto muito de futebol.",fr:"J'aime beaucoup le football."},
+  {s:"joao",pt:"Então no domingo vamos ver o jogo juntos!",fr:"Alors dimanche, on regarde le match ensemble !"},
+  {t:"quiz",ask:"Où travaille Ana ?",opts:["Dans un hôpital à Coimbra","Dans un café à Lisbonne","Dans une école à Porto"],ok:0}
+ ]},
+ {id:"s5",lvl:3,emoji:"🚆",title:"Como foi a viagem?",fr:"Tu racontes ton retour en France",steps:[
+  {s:"rosa",pt:"Então, como foi a viagem de regresso?",fr:"Alors, comment s'est passé le voyage du retour ?"},
+  {s:"tu",pt:"Correu bem, mas perdi o comboio em Paris!",fr:"Ça s'est bien passé, mais j'ai raté le train à Paris !"},
+  {s:"rosa",pt:"A sério? E o que fizeste?",fr:"Sérieux ? Et qu'est-ce que tu as fait ?"},
+  {t:"fill",s:"tu",pt:"___ uma hora e apanhei outro.",fr:"J'ai attendu une heure et j'en ai pris un autre.",opts:["Esperei","Espero","Esperar"],ok:0,note:"Passé simple portugais (pretérito perfeito) : -ar → -ei à la 1re personne. Esperar → esperei, ligar → liguei."},
+  {s:"rosa",pt:"Coitado! Chegaste muito tarde?",fr:"Le pauvre ! Tu es arrivé très tard ?"},
+  {s:"tu",pt:"Cheguei à meia-noite. Estava muito cansado.",fr:"Je suis arrivé à minuit. J'étais très fatigué."},
+  {s:"rosa",pt:"A avó gostou muito de te ver.",fr:"Mamie a été très contente de te voir."},
+  {t:"reply",ask:"Dis que toi aussi, et qu'elle te manque déjà.",opts:["Eu também gostei muito. Já tenho saudades!","Não faço ideia.","Tanto faz."],ok:0,fr:"Moi aussi, j'ai été très content. Elle me manque déjà !"},
+  {s:"rosa",pt:"Quando voltas?",fr:"Quand est-ce que tu reviens ?"},
+  {t:"reply",ask:"Tu reviens à Noël. Attention au temps du verbe !",opts:["Volto no Natal.","Voltei no Natal.","Voltava no Natal."],ok:0,fr:"Je reviens à Noël."},
+  {s:"rosa",pt:"Ótimo! Vamos fazer uma grande festa.",fr:"Génial ! On va faire une grande fête."},
+  {t:"quiz",ask:"À quelle heure es-tu arrivé chez toi ?",opts:["À minuit","À midi","À huit heures"],ok:0}
+ ]},
+ {id:"s6",lvl:4,emoji:"🤍",title:"A avó não se sente bem",fr:"Rassurer, prendre des nouvelles",steps:[
+  {s:"rosa",pt:"Olá. Olha, a avó não se sente muito bem hoje.",fr:"Salut. Écoute, mamie ne se sent pas très bien aujourd'hui."},
+  {t:"reply",ask:"Réagis et demande ce qu'elle a.",opts:["Que pena! O que é que ela tem?","Que sorte!","Tanto faz."],ok:0,fr:"Mince ! Qu'est-ce qu'elle a ?"},
+  {s:"rosa",pt:"Dói-lhe a cabeça e está muito cansada.",fr:"Elle a mal à la tête et elle est très fatiguée."},
+  {t:"fill",s:"tu",pt:"Estou ___. Ela foi ao médico?",fr:"Je suis inquiet. Elle est allée chez le médecin ?",opts:["preocupado","orgulhoso","cheio"],ok:0},
+  {s:"rosa",pt:"Ainda não. Vou levá-la amanhã de manhã.",fr:"Pas encore. Je l'emmène demain matin."},
+  {s:"rosa",pt:"Não te preocupes, não deve ser nada grave.",fr:"Ne t'inquiète pas, ça ne doit rien être de grave."},
+  {t:"reply",ask:"Demande-lui de t'appeler quand elle pourra.",opts:["Liga-me quando puderes.","Deixa estar.","Quem me dera!"],ok:0,fr:"Appelle-moi quand tu peux."},
+  {s:"rosa",pt:"Claro. E liga à avó, ela vai ficar contente.",fr:"Bien sûr. Et appelle mamie, ça va lui faire plaisir."},
+  {t:"fill",s:"tu",pt:"Vou ligar-lhe logo à noite. Dá-lhe um ___ meu.",fr:"Je l'appelle ce soir. Fais-lui un bisou de ma part.",opts:["beijinho","bocadinho","bilhete"],ok:0},
+  {s:"rosa",pt:"Dou, sim. Força!",fr:"Je n'y manquerai pas. Courage !"},
+  {t:"quiz",ask:"Quand Rosa emmène-t-elle la grand-mère chez le médecin ?",opts:["Demain matin","Ce soir","La semaine prochaine"],ok:0}
+ ]}
+ ,
+ /* ---- Histoires bonus : 2 par chapitre ---- */
+ {id:"s7",lvl:1,ch:1,bonus:true,emoji:"🚕",title:"No táxi",fr:"Le trajet jusqu'à chez la avó",steps:[
+  {s:"taxi",pt:"Boa tarde! Para onde vamos?",fr:"Bonjour ! On va où ?"},
+  {t:"reply",ask:"Donne l'adresse : la Rua das Flores.",opts:["Para a Rua das Flores, por favor.","Uma mesa para dois, por favor.","Sou vegetariano."],ok:0,fr:"À la Rua das Flores, s'il vous plaît."},
+  {s:"taxi",pt:"É a primeira vez em Lisboa?",fr:"C'est la première fois à Lisbonne ?"},
+  {s:"tu",pt:"Não, a minha família vive aqui.",fr:"Non, ma famille vit ici."},
+  {s:"taxi",pt:"Ah, que bom! E fala muito bem português.",fr:"Ah, super ! Et vous parlez très bien portugais.",note:"Avec un inconnu, on évite le « tu » : on parle à la 3e personne (« fala », « o senhor »)."},
+  {t:"fill",s:"tu",pt:"Obrigado! Falo um ___.",fr:"Merci ! Je parle un peu.",opts:["pouco","longe","perto"],ok:0},
+  {s:"taxi",pt:"Chegámos! São quinze euros.",fr:"Nous sommes arrivés ! Ça fait quinze euros.",note:"« Chegámos » avec accent = passé au Portugal. Sans accent, « chegamos » = nous arrivons."},
+  {t:"reply",ask:"Paie et laisse-lui la monnaie.",opts:["Aqui tem. Fique com o troco.","Onde é a casa de banho?","Não percebo."],ok:0,fr:"Voici. Gardez la monnaie."},
+  {s:"taxi",pt:"Muito obrigado! Boa estadia!",fr:"Merci beaucoup ! Bon séjour !"},
+  {t:"quiz",ask:"Combien coûte la course ?",opts:["15 euros","50 euros","5 euros"],ok:0}
+ ]},
+ {id:"s8",lvl:1,ch:1,bonus:true,emoji:"🧭",title:"Perdido no Chiado",fr:"Tu demandes ton chemin",steps:[
+  {s:"tu",pt:"Desculpe, onde fica a estação do Rossio?",fr:"Excusez-moi, où se trouve la gare du Rossio ?"},
+  {s:"senhora",pt:"É perto. Vai sempre em frente e depois vira à esquerda.",fr:"C'est près. Allez tout droit, puis tournez à gauche."},
+  {t:"fill",s:"tu",pt:"É ___?",fr:"C'est loin ?",opts:["longe","fome","tarde"],ok:0},
+  {s:"senhora",pt:"Não, são cinco minutos a pé.",fr:"Non, c'est à cinq minutes à pied."},
+  {t:"quiz",ask:"Après avoir marché tout droit, de quel côté faut-il tourner ?",opts:["À gauche","À droite","Il faut faire demi-tour"],ok:0},
+  {s:"tu",pt:"Muito obrigado!",fr:"Merci beaucoup !"},
+  {s:"senhora",pt:"De nada. É francês?",fr:"De rien. Vous êtes français ?"},
+  {t:"reply",ask:"Réponds que oui, et que tu es en vacances.",opts:["Sim, sou francês. Estou de férias.","Não percebo.","Tenho muita fome."],ok:0,fr:"Oui, je suis français. Je suis en vacances."},
+  {s:"senhora",pt:"Bem-vindo! Bom passeio.",fr:"Bienvenue ! Bonne promenade."},
+  {t:"quiz",ask:"Comment va-t-il à la gare ?",opts:["À pied","En bus","En taxi"],ok:0}
+ ]},
+ {id:"s9",lvl:1,ch:2,bonus:true,emoji:"🚆",title:"O comboio para o Porto",fr:"Acheter un billet et prévenir João",steps:[
+  {s:"func",pt:"Bom dia. Diga?",fr:"Bonjour. Je vous écoute ?",note:"« Diga? » (littéralement « dites ? ») : la façon habituelle d'inviter un client à parler."},
+  {t:"reply",ask:"Demande un billet pour Porto.",opts:["Um bilhete para o Porto, por favor.","A conta, por favor.","Bom apetite!"],ok:0,fr:"Un billet pour Porto, s'il vous plaît."},
+  {s:"func",pt:"Ida e volta?",fr:"Aller-retour ?"},
+  {s:"tu",pt:"Só ida, obrigado.",fr:"Aller simple seulement, merci."},
+  {s:"func",pt:"São vinte e cinco euros. O comboio parte às dez e meia.",fr:"Ça fait vingt-cinq euros. Le train part à dix heures et demie."},
+  {t:"quiz",ask:"À quelle heure part le train ?",opts:["10 h 30","12 h","10 h"],ok:0},
+  {s:"joao",pt:"Estou? Já estás no comboio?",fr:"Allô ? Tu es déjà dans le train ?"},
+  {t:"fill",s:"tu",pt:"Sim! Chego ao Porto à uma ___.",fr:"Oui ! J'arrive à Porto à une heure.",opts:["hora","dia","semana"],ok:0},
+  {s:"joao",pt:"Fixe! Eu vou buscar-te à estação.",fr:"Cool ! Je viens te chercher à la gare."},
+  {t:"reply",ask:"Remercie-le et dis à tout à l'heure.",opts:["Ótimo, obrigado! Até logo!","Não faz mal.","Estou perdido."],ok:0,fr:"Super, merci ! À tout à l'heure !"},
+  {t:"quiz",ask:"Qui vient le chercher à la gare ?",opts:["João","Tia Rosa","La avó"],ok:0}
+ ]},
+ {id:"s10",lvl:1,ch:2,bonus:true,emoji:"🌧️",title:"Dia de chuva",fr:"Pas de plage, mais un appel à la avó",steps:[
+  {s:"rosa",pt:"Está a chover muito! Hoje não vamos à praia.",fr:"Il pleut beaucoup ! Aujourd'hui, on ne va pas à la plage."},
+  {t:"reply",ask:"Rassure-la : ce n'est pas grave.",opts:["Não faz mal, ficamos em casa.","Está delicioso!","Sempre em frente!"],ok:0,fr:"Ce n'est pas grave, on reste à la maison."},
+  {s:"rosa",pt:"Que horas são?",fr:"Quelle heure est-il ?"},
+  {t:"fill",s:"tu",pt:"São três ___.",fr:"Il est trois heures.",opts:["horas","dias","euros"],ok:0},
+  {s:"rosa",pt:"Então vamos ligar à avó. Onde está o teu telemóvel?",fr:"Alors appelons mamie. Où est ton portable ?"},
+  {s:"tu",pt:"Ai, não tem bateria!",fr:"Oh non, il n'a plus de batterie !"},
+  {s:"rosa",pt:"Não há problema, usa o meu.",fr:"Pas de problème, utilise le mien."},
+  {s:"avo",pt:"Estou? Ah, são vocês! Que bom!",fr:"Allô ? Ah, c'est vous ! Super !"},
+  {t:"reply",ask:"Dis-lui qu'elle vous manque.",opts:["Olá, avó! Temos muitas saudades!","Quanto custa?","Estou perdido."],ok:0,fr:"Bonjour, mamie ! Tu nous manques beaucoup !"},
+  {t:"quiz",ask:"Pourquoi ne vont-ils pas à la plage ?",opts:["Il pleut","Il fait trop chaud","La plage est fermée"],ok:0}
+ ]},
+ {id:"s11",lvl:2,ch:3,bonus:true,emoji:"📷",title:"O álbum de fotografias",fr:"La avó sort les vieilles photos",steps:[
+  {s:"avo",pt:"Anda cá ver as fotografias antigas.",fr:"Viens voir les vieilles photos.",note:"« Anda cá! » (viens ici) : un appel affectueux très courant au Portugal."},
+  {s:"avo",pt:"Esta é a tua mãe, quando era pequena.",fr:"Ça, c'est ta mère, quand elle était petite."},
+  {t:"reply",ask:"Dis qu'elle est mignonne.",opts:["Que gira!","Que pena!","Tanto faz."],ok:0,fr:"Qu'elle est mignonne !",note:"« Giro / gira » = mignon, joli. Un mot qu'on entend partout au Portugal."},
+  {s:"avo",pt:"E este é o teu avô. Era pescador na Nazaré.",fr:"Et voici ton grand-père. Il était pêcheur à Nazaré."},
+  {t:"fill",s:"tu",pt:"O meu avô era ___?",fr:"Mon grand-père était pêcheur ?",opts:["pescador","vegetariano","francês"],ok:0},
+  {s:"avo",pt:"Era, sim. E estes são os teus primos, o João e a Inês.",fr:"Oui. Et voici tes cousins, João et Inês."},
+  {s:"tu",pt:"Tenho tantos primos!",fr:"J'ai tellement de cousins !"},
+  {s:"avo",pt:"Tens! A nossa família é muito grande.",fr:"Eh oui ! Notre famille est très grande.",note:"Au Portugal, on répond souvent « oui » en répétant le verbe : « Tens? — Tenho! »."},
+  {t:"quiz",ask:"Quel était le métier du grand-père ?",opts:["Pêcheur","Boulanger","Professeur"],ok:0}
+ ]},
+ {id:"s12",lvl:2,ch:3,bonus:true,emoji:"🖍️",title:"A prima Inês",fr:"Ta petite cousine te pose mille questions",steps:[
+  {s:"ines",pt:"Olá! Tu és o primo de França?",fr:"Salut ! C'est toi le cousin de France ?"},
+  {t:"reply",ask:"Réponds et demande-lui son prénom.",opts:["Sou, sim! Como te chamas?","Sou vegetariano.","Até amanhã!"],ok:0,fr:"Oui, c'est moi ! Comment tu t'appelles ?"},
+  {s:"ines",pt:"Chamo-me Inês. Tenho oito anos. E tu?",fr:"Je m'appelle Inês. J'ai huit ans. Et toi ?"},
+  {t:"fill",s:"tu",pt:"Eu tenho trinta ___.",fr:"Moi, j'ai trente ans.",opts:["anos","dias","euros"],ok:0},
+  {s:"ines",pt:"Trinta?! És muito velho!",fr:"Trente ?! T'es super vieux !"},
+  {s:"tu",pt:"Obrigado pela simpatia, Inês!",fr:"Merci pour ta gentillesse, Inês !"},
+  {s:"ines",pt:"O que gostas de fazer?",fr:"Qu'est-ce que tu aimes faire ?"},
+  {t:"reply",ask:"Tu aimes jouer au foot. Retourne-lui la question.",opts:["Gosto de jogar futebol. E tu?","Tenho dois filhos.","Não concordo."],ok:0,fr:"J'aime jouer au foot. Et toi ?"},
+  {s:"ines",pt:"Eu gosto de desenhar. Vou fazer um desenho para ti!",fr:"Moi, j'aime dessiner. Je vais te faire un dessin !"},
+  {t:"quiz",ask:"Quel âge a Inês ?",opts:["8 ans","10 ans","13 ans"],ok:0}
+ ]},
+ {id:"s13",lvl:2,ch:4,bonus:true,emoji:"🍅",title:"No mercado",fr:"Les courses pour le dîner",steps:[
+  {s:"rosa",pt:"Hoje fazemos o jantar juntos. Vamos ao mercado!",fr:"Aujourd'hui, on prépare le dîner ensemble. Allons au marché !"},
+  {s:"vend",pt:"Bom dia! O que vai ser?",fr:"Bonjour ! Qu'est-ce que ce sera ?"},
+  {t:"reply",ask:"Demande un kilo de tomates.",opts:["Queria um quilo de tomates, por favor.","A conta, por favor.","Feliz Natal!"],ok:0,fr:"Je voudrais un kilo de tomates, s'il vous plaît."},
+  {s:"vend",pt:"Mais alguma coisa?",fr:"Autre chose ?"},
+  {t:"fill",s:"tu",pt:"Sim, e ___ batatas.",fr:"Oui, et des pommes de terre.",opts:["umas","uma","um"],ok:0,note:"« Umas » = « des » au féminin pluriel (« uns » au masculin)."},
+  {s:"vend",pt:"São quatro euros e cinquenta.",fr:"Ça fait quatre euros cinquante."},
+  {s:"rosa",pt:"Ótimo. Agora vamos comprar o peixe para o jantar!",fr:"Parfait. Maintenant, allons acheter le poisson pour le dîner !"},
+  {t:"reply",ask:"Propose ton aide pour la cuisine.",opts:["Posso ajudar a cozinhar?","Não gosto de ti.","Já acabei."],ok:0,fr:"Je peux aider à cuisiner ?"},
+  {s:"rosa",pt:"Claro! Tu cortas os tomates.",fr:"Bien sûr ! C'est toi qui coupes les tomates."},
+  {t:"quiz",ask:"Combien coûtent les légumes ?",opts:["4,50 €","14,50 €","40 €"],ok:0}
+ ]},
+ {id:"s14",lvl:2,ch:4,bonus:true,emoji:"🎂",title:"Parabéns, avó!",fr:"Les 80 ans de la avó",steps:[
+  {s:"joao",pt:"Hoje a avó faz oitenta anos! Já compraste o presente?",fr:"Aujourd'hui, mamie a quatre-vingts ans ! Tu as acheté le cadeau ?"},
+  {s:"tu",pt:"Sim, comprei flores.",fr:"Oui, j'ai acheté des fleurs."},
+  {t:"reply",ask:"Souhaite-lui un joyeux anniversaire.",opts:["Parabéns, avó! Muitas felicidades!","Bom apetite!","Boa viagem!"],ok:0,fr:"Joyeux anniversaire, mamie ! Plein de bonheur !"},
+  {s:"avo",pt:"Ai, que flores tão bonitas! Obrigada, querido.",fr:"Oh, quelles jolies fleurs ! Merci, mon chéri.",note:"La avó dit « obrigada » : c'est une femme qui remercie."},
+  {s:"joao",pt:"Agora o bolo! Quem quer uma fatia?",fr:"Maintenant, le gâteau ! Qui veut une part ?"},
+  {t:"fill",s:"tu",pt:"Eu quero! Só um ___.",fr:"Moi ! Juste un petit peu.",opts:["bocadinho","bilhete","beijinho"],ok:0},
+  {s:"avo",pt:"Este é o melhor dia do ano. A família toda junta!",fr:"C'est le plus beau jour de l'année. Toute la famille réunie !"},
+  {t:"reply",ask:"Dis-lui que tu l'aimes beaucoup.",opts:["Gosto muito de si, avó.","Tanto faz, avó.","Estou cheio, avó."],ok:0,fr:"Je t'aime beaucoup, mamie.",note:"« Si » est la forme respectueuse de « toi » quand on parle à la 3e personne. Avec ses grands-parents, ça dépend des familles."},
+  {t:"quiz",ask:"Quel âge a la grand-mère ?",opts:["80 ans","70 ans","90 ans"],ok:0}
+ ]},
+ {id:"s15",lvl:3,ch:5,bonus:true,emoji:"🐋",title:"As férias da Ana",fr:"Ana raconte son voyage aux Açores",steps:[
+  {s:"ana",pt:"Sabes onde fui nas férias? Fui aos Açores!",fr:"Tu sais où je suis allée en vacances ? Aux Açores !"},
+  {t:"reply",ask:"Montre ton intérêt et demande comment c'était.",opts:["A sério? Como foi?","Ainda não.","Vou ficar uma semana."],ok:0,fr:"Sérieux ? C'était comment ?"},
+  {s:"ana",pt:"Foi incrível! Fizemos caminhadas e vimos baleias.",fr:"C'était incroyable ! On a fait des randonnées et on a vu des baleines."},
+  {t:"fill",s:"tu",pt:"Eu nunca ___ nos Açores.",fr:"Je ne suis jamais allé aux Açores.",opts:["estive","estou","estar"],ok:0},
+  {s:"ana",pt:"Tens de ir! No próximo verão vamos lá outra vez.",fr:"Il faut que tu y ailles ! L'été prochain, on y retourne."},
+  {t:"reply",ask:"Demande si tu peux venir avec eux.",opts:["Posso ir convosco?","Fiquei em casa.","Não dormi nada."],ok:0,fr:"Je peux venir avec vous ?",note:"« Convosco » = avec vous (pluriel). Une forme typique du Portugal."},
+  {s:"ana",pt:"Claro! Vai ser muito divertido.",fr:"Bien sûr ! Ça va être super."},
+  {t:"quiz",ask:"Qu'ont-ils vu aux Açores ?",opts:["Des baleines","Un volcan en éruption","Des requins"],ok:0}
+ ]},
+ {id:"s16",lvl:3,ch:5,bonus:true,emoji:"☔",title:"Um dia horrível",fr:"La journée catastrophe de João",steps:[
+  {s:"joao",pt:"Ontem foi um dia horrível!",fr:"Hier, c'était une journée horrible !"},
+  {s:"tu",pt:"Porquê? O que aconteceu?",fr:"Pourquoi ? Qu'est-ce qui s'est passé ?"},
+  {s:"joao",pt:"Acordei tarde e perdi o autocarro.",fr:"Je me suis réveillé tard et j'ai raté le bus."},
+  {t:"reply",ask:"Compatis et demande la suite.",opts:["Coitado! E depois?","Que sorte!","Parabéns!"],ok:0,fr:"Le pauvre ! Et ensuite ?"},
+  {s:"joao",pt:"Depois choveu e eu não tinha guarda-chuva.",fr:"Ensuite, il a plu et je n'avais pas de parapluie."},
+  {t:"fill",s:"tu",pt:"E chegaste ___ ao trabalho?",fr:"Et tu es arrivé en retard au travail ?",opts:["atrasado","contente","cheio"],ok:0},
+  {s:"joao",pt:"Cheguei uma hora atrasado! O chefe não ficou nada contente.",fr:"Je suis arrivé avec une heure de retard ! Le chef n'était pas du tout content."},
+  {t:"reply",ask:"Encourage-le pour demain.",opts:["Amanhã vai correr melhor!","Ontem foi ótimo!","Vou ficar uma semana."],ok:0,fr:"Demain, ça ira mieux !"},
+  {t:"quiz",ask:"Qu'est-ce que João a raté ?",opts:["Le bus","Le train","Le dîner"],ok:0}
+ ]},
+ {id:"s17",lvl:4,ch:6,bonus:true,emoji:"🐟",title:"O melhor bacalhau",fr:"Grand débat familial à table",steps:[
+  {s:"joao",pt:"Para mim, o melhor é o bacalhau à Brás.",fr:"Pour moi, le meilleur, c'est le bacalhau à Brás."},
+  {s:"rosa",pt:"Não concordo! O bacalhau com natas é muito melhor.",fr:"Pas d'accord ! Le bacalhau à la crème est bien meilleur.",note:"On dit souvent qu'il existe une recette de bacalhau pour chaque jour de l'année."},
+  {s:"avo",pt:"E tu, querido? O que é que achas?",fr:"Et toi, mon chéri ? Qu'est-ce que tu en penses ?"},
+  {t:"reply",ask:"Reste diplomate.",opts:["Acho que os dois são ótimos.","Não me sinto bem.","Já volto."],ok:0,fr:"Je pense que les deux sont excellents."},
+  {s:"joao",pt:"Isso não é resposta! Tens de escolher.",fr:"Ce n'est pas une réponse ! Tu dois choisir."},
+  {t:"fill",s:"tu",pt:"Então ___ o bacalhau da avó!",fr:"Alors je choisis le bacalhau de mamie !",opts:["escolho","escolhi","escolher"],ok:0},
+  {s:"avo",pt:"Muito bem! Este menino é muito esperto.",fr:"Très bien ! Ce garçon est très malin."},
+  {t:"quiz",ask:"Quel bacalhau préfère Tia Rosa ?",opts:["Le bacalhau à la crème","Le bacalhau à Brás","Celui de la avó"],ok:0}
+ ]},
+ {id:"s18",lvl:4,ch:6,bonus:true,emoji:"🚗",title:"O exame de condução",fr:"Remonter le moral de João",steps:[
+  {s:"joao",pt:"Chumbei no exame de condução.",fr:"J'ai raté l'examen du permis.",note:"« Chumbar » = rater un examen. Très courant au Portugal."},
+  {t:"reply",ask:"Réconforte-le.",opts:["Que pena! Não fiques triste.","Que sorte!","Parabéns!"],ok:0,fr:"Dommage ! Ne sois pas triste."},
+  {s:"joao",pt:"Estudei muito, mas fiquei nervoso.",fr:"J'ai beaucoup révisé, mais j'ai été stressé."},
+  {t:"fill",s:"tu",pt:"É normal. Da próxima vez vai correr ___.",fr:"C'est normal. La prochaine fois, ça se passera bien.",opts:["bem","mal","longe"],ok:0},
+  {s:"joao",pt:"Achas?",fr:"Tu crois ?"},
+  {t:"reply",ask:"Encourage-le avec conviction.",opts:["Claro! Força, primo!","Tanto faz.","Deixa estar."],ok:0,fr:"Bien sûr ! Courage, cousin !"},
+  {s:"joao",pt:"Obrigado. Se eu passar, vamos jantar fora. Eu pago!",fr:"Merci. Si je réussis, on va dîner au restaurant. C'est moi qui paie !",note:"« Se eu passar » : le futur du subjonctif, très utilisé après « se » et « quando »."},
+  {t:"quiz",ask:"Pourquoi João a-t-il raté l'examen ?",opts:["Il était stressé","Il n'avait pas révisé","Il est arrivé en retard"],ok:0}
+ ]}
+
+];
+const storyNode = st => allNodes().find(nd=>nd.type==="story"&&nd.story===st.id);
+const storyOpen = st => { const nd=storyNode(st); return !!nd && nodeState(nd)!=="locked"; };
+const storyState = id => (S.stories||{})[id];
+
+function renderStories(){
+  session=null;
+  allNodes();
+  const item = st => {
+    const open=storyOpen(st), done=storyState(st.id), nd=storyNode(st);
+    const right = !open ? "🔒" : done ? `✅ ${done.best}/${done.total}` : `<span class="due">Nouveau</span>`;
+    const lock = st.bonus ? "Se débloque après la leçon juste avant, sur ton chemin" : `Fin du chapitre ${nd.ch.n}`;
+    return `<button class="story-item ${open?"":"locked"}" ${open?`data-story="${st.id}"`:"disabled"}>
+      <span class="ic">${st.emoji}</span>
+      <span class="st-txt"><strong>${esc(st.title)}${st.bonus?` <span class="tag">bonus</span>`:""}</strong><small>${open?esc(st.fr):lock}</small></span>
+      <span class="st-right">${right}</span></button>`;
+  };
+  const groups = SAGA.map(ch=>{
+    const list = ch.nodes.filter(nd=>nd.type==="story").map(nd=>STORIES.find(st=>st.id===nd.story));
+    const read = list.filter(st=>storyState(st.id)).length;
+    return `<h2 class="st-group">${ch.emoji} Chapitre ${ch.n} · ${esc(ch.title)} <small>${read}/${list.length}</small></h2>
+      <div class="modes">${list.map(item).join("")}</div>`;
+  }).join("");
+  $app.innerHTML = `<div class="top"><button class="back" id="back" aria-label="Retour">←</button><strong>Histoires en famille</strong></div>
+    <p class="lead">De petites scènes de la vie de famille. Écoute, touche une bulle pour voir la traduction, et réponds quand c'est ton tour. Les histoires bonus sont facultatives : elles ne bloquent jamais ton chemin.</p>
+    ${groups}`;
+  document.getElementById("back").onclick=render;
+  $app.querySelectorAll("[data-story]").forEach(b=>b.onclick=()=>playStory(b.dataset.story));
+  window.scrollTo(0,0);
+}
+
+function playStory(id,nd){
+  const st=STORIES.find(x=>x.id===id);
+  session={mode:"story",story:st,node:nd||storyNode(st),i:0,good:0,asked:0,xp:0,combo:0,xpPer:XP.story,shownAt:Date.now()};
+  $app.innerHTML = `<div class="top"><button class="back" id="back" aria-label="Retour">←</button><div class="bar"><i id="st-bar" style="width:0%"></i></div></div>
+    <h2 class="st-title">${st.emoji} ${esc(st.title)}</h2>
+    <div class="chat" id="chat"></div>
+    <div class="st-act" id="act"></div>`;
+  document.getElementById("back").onclick=()=>{ window.speechSynthesis&&speechSynthesis.cancel(); renderStories(); };
+  storyStep();
+}
+function bubble(who,pt,fr,note){
+  const c=CAST[who]||CAST.tu, me=who==="tu";
+  const el=document.createElement("div");
+  el.className="bub-row"+(me?" me":"");
+  el.innerHTML=`${me?"":`<span class="av" aria-hidden="true">${c.av}</span>`}
+    <button class="bub ${me?"me":""}" aria-label="${esc(c.name)} : ${esc(pt)}. Toucher pour la traduction">
+      ${me?"":`<span class="who">${esc(c.name)}</span>`}
+      <span class="bpt">${esc(pt)}</span>
+      <span class="tr hidden">${esc(fr)}</span></button>`;
+  const b=el.querySelector(".bub");
+  b.onclick=()=>{ el.querySelector(".tr").classList.toggle("hidden"); speak(pt,false,c.pitch); };
+  document.getElementById("chat").appendChild(el);
+  if(note){ const n=document.createElement("p"); n.className="note"; n.textContent="💡 "+note; document.getElementById("chat").appendChild(n); }
+  speak(pt,false,c.pitch);
+  el.scrollIntoView({behavior:"smooth",block:"end"});
+}
+function storyStep(){
+  const s=session, st=s.story, act=document.getElementById("act");
+  document.getElementById("st-bar").style.width=Math.round(s.i/st.steps.length*100)+"%";
+  if(s.i>=st.steps.length) return storyEnd();
+  const step=st.steps[s.i];
+  const goOn=()=>{ s.i++; storyStep(); };
+  if(!step.t){
+    bubble(step.s,step.pt,step.fr,step.note);
+    act.innerHTML=`<button class="btn" id="st-next">Continuer</button>`;
+    document.getElementById("st-next").onclick=goOn;
+    return;
+  }
+  s.shownAt=Date.now(); s.asked++;
+  const order=shuffle(step.opts.map((o,k)=>k));
+  const ask = step.t==="fill" ? "Complète la phrase" : step.ask;
+  let preview="";
+  if(step.t==="fill"){
+    const c=CAST[step.s]||CAST.tu;
+    preview=`<p class="fill-line"><span class="who">${esc(c.name)}</span>${esc(step.pt).replace("___",'<span class="gap">____</span>')}</p>`;
+  }
+  act.innerHTML=`<div class="st-q"><p class="prompt">${esc(ask)}</p>${preview}
+    <div class="choices">${order.map(k=>`<button class="choice" data-k="${k}">${esc(step.opts[k])}</button>`).join("")}</div></div>`;
+  act.scrollIntoView({behavior:"smooth",block:"end"});
+  let answered=false;
+  act.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{
+    if(answered) return; answered=true;
+    const k=+b.dataset.k, ok=k===step.ok;
+    b.classList.add(ok?"good":"bad");
+    if(!ok) act.querySelector(`.choice[data-k="${step.ok}"]`).classList.add("good");
+    act.querySelectorAll(".choice").forEach(x=>x.disabled=true);
+    award(ok);
+    const msg = ok ? ["Certo! 👏","Muito bem!","Isso mesmo!"][Math.floor(Math.random()*3)] : "Quase… la bonne réponse est en vert.";
+    const fb=document.createElement("p"); fb.className="feedback "+(ok?"ok":"ko"); fb.textContent=msg;
+    act.querySelector(".st-q").appendChild(fb);
+    const nx=document.createElement("button"); nx.className="btn"; nx.textContent="Continuer"; nx.style.marginTop="12px";
+    nx.onclick=()=>{
+      if(step.t==="reply") bubble("tu",step.opts[step.ok],step.fr,step.note);
+      if(step.t==="fill") bubble(step.s,step.pt.replace("___",step.opts[step.ok]),step.fr,step.note);
+      goOn();
+    };
+    act.appendChild(nx);
+    if(step.t==="quiz"){} // pas de bulle pour les questions de compréhension
+  });
+}
+function storyEnd(){
+  const s=session, st=s.story;
+  if(!S.stories || Object.isFrozen(S.stories)) S.stories=Object.assign({},S.stories||{});
+  const prev=S.stories[st.id];
+  const first=!prev;
+  S.stories[st.id]={done:true,best:Math.max(prev?prev.best:0,s.good),total:s.asked};
+  if(first){ S.xp+=20; dayRec().xp+=20; s.xp+=20; }
+  const nd=s.node, ns=nd?nodeState(nd):"locked", onPath = nd && !isDone(nd.id) && (ns==="current"||ns==="open");
+  if(onPath) markDone(nd.id);
+  save();
+  document.getElementById("act").innerHTML=`<div class="card end" style="min-height:0">
+    <p class="big">História terminada! 🎉</p>
+    <p class="xp-big">+${s.xp} XP</p>
+    <p class="prompt">${s.good} / ${s.asked} bonnes réponses${first?" · dont +20 XP pour ta première lecture":""}</p></div>
+    <div class="row"><button class="btn alt" id="st-again">Relire</button>
+    <button class="btn" id="st-path">${onPath&&!nd.bonus?"Ouvrir le coffre du chapitre 🎁":"Continuer"}</button></div>`;
+  document.getElementById("st-bar").style.width="100%";
+  document.getElementById("st-again").onclick=()=>playStory(st.id,nd);
+  document.getElementById("st-path").onclick=()=>{
+    const c=currentNode();
+    if(onPath && !nd.bonus && c && c.type==="chest") return openChest(c);
+    render();
+  };
+  const a=document.getElementById("act"); if(a.scrollIntoView) a.scrollIntoView({behavior:"smooth",block:"end"});
+}
+
+/* ---------- Démarrage ---------- */
+document.getElementById("home-btn").onclick=()=>render();
+document.getElementById("stats-btn").onclick=()=>{ window.speechSynthesis&&speechSynthesis.cancel(); renderStats(); };
+function render(){ session=null; migratePath(); renderHome(); }
+
+loadLocal();
+S.variant="pt";
+render();
+setTimeout(()=>{ loadVoices(); if(!session) render(); },600);
+initRemote();
+</script>
+</body>
+</html>
